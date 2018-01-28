@@ -12,7 +12,7 @@ func main() {
 	// mdc := gcd.GcdEuclids(234, 357)
 	// fmt.Println(mdc)
 
-	a := []int{1, 7, 19, 14, 7, 16, 15, 14, 4, 11, 10, 13, 20, 4, 8, 17, 7, 17, 5, 2}
+	a := []int{15, 13, 2, 25, 7, 17, 20, 8, 4}
 	rwarray.PrintArray(a, len(a))
 	heap.HeapSort(a, len(a))
 	rwarray.PrintArray(a, len(a))

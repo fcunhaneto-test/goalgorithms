@@ -16,7 +16,7 @@ func right(i int) int {
 MaintainHeapfy heap property maintenance
 
 param:
-a: 	array representing heap
+a: 	slice representing heap
 i: 	first level of tree, for left use 1 and for right use 2
 n: 	array size
 */
@@ -39,13 +39,26 @@ func maintainHeapfy(a []int, i int, n int) {
 	}
 }
 
+/*
+buildHeap create array heap max
+
+param:
+a: 	slice representing heap
+n: 	array size
+*/
 func buildHeap(a []int, n int) {
 	for i := n / 2; i > -1; i-- {
 		maintainHeapfy(a, i, n)
 	}
 }
 
-// HeapSort sort a array heap
+/*
+HeapSort sort a array heap max
+
+param:
+a: 	slice representing heap
+n: 	array size
+*/
 func HeapSort(a []int, n int) {
 	buildHeap(a, n)
 	for i := n - 1; i > -1; i-- {
