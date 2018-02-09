@@ -1,8 +1,8 @@
 package main
 
 import (
+	"fmt"
 	"goalgorithms/heap"
-	"rwarray"
 )
 
 func main() {
@@ -13,7 +13,7 @@ func main() {
 	// fmt.Println(mdc)
 
 	a := []int{15, 13, 2, 25, 7, 17, 20, 8, 4}
-	rwarray.PrintArray(a, len(a))
+	fmt.Println(a)
 	heap.HeapSort(a, len(a))
-	rwarray.PrintArray(a, len(a))
+	fmt.Println(a)
 }
