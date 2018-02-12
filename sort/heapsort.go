@@ -25,11 +25,11 @@ func maintainHeapfy(a []int, i int, n int) {
 	r := right(i)
 	max := i
 
-	if l < n && a[l] > a[i] {
+	if l < n && a[l] < a[i] {
 		max = l
 	}
 
-	if r < n && a[r] > a[max] {
+	if r < n && a[r] < a[max] {
 		max = r
 	}
 
@@ -59,7 +59,7 @@ param:
 a: 	slice representing heap
 n: 	array size
 */
-func HeapSort(a []int, n int) {
+func Heapsort(a []int, n int) {
 	buildHeap(a, n)
 	for i := n - 1; i > -1; i-- {
 		a[0], a[i] = a[i], a[0]

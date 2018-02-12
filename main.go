@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"goalgorithms/heap"
+	"goalgorithms/sort"
 )
 
 func main() {
@@ -14,6 +14,6 @@ func main() {
 
 	a := []int{15, 13, 2, 25, 7, 17, 20, 8, 4}
 	fmt.Println(a)
-	heap.HeapSort(a, len(a))
+	sort.Heapsort(a, len(a))
 	fmt.Println(a)
 }

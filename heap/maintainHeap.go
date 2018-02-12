@@ -25,11 +25,11 @@ func MaintainHeapfy(a []int, i int, n int) {
 	r := right(i)
 	max := i
 
-	if l < n && a[l] > a[i] {
+	if l < n && a[l] < a[i] {
 		max = l
 	}
 
-	if r < n && a[r] > a[max] {
+	if r < n && a[r] < a[max] {
 		max = r
 	}
 
