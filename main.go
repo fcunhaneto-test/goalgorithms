@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"goalgorithms/sort"
+	"goalgorithms/arrayMaxs"
 )
 
 func main() {
@@ -12,8 +12,13 @@ func main() {
 	// mdc := gcd.GcdEuclids(234, 357)
 	// fmt.Println(mdc)
 
-	a := []int{15, 13, 2, 25, 7, 17, 20, 8, 4}
-	fmt.Println(a)
-	sort.Heapsort(a, len(a))
-	fmt.Println(a)
+	// a := []int{15, 13, 2, 25, 7, 17, 20, 8, 4}
+	// fmt.Println(a)
+	// sort.Heapsort(a, len(a))
+	// fmt.Println(a)
+
+	// a := []int{-2, 1, -3, 4, -1, 2, 1, -5, 4}
+	a := []int{0, 13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7}
+	i, j, max := arrayMaxs.SubArrayMax(a)
+	fmt.Println("[", i, ", ", j, "]", " = ", max)
 }
