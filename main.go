@@ -2,13 +2,19 @@ package main
 
 import (
 	"fmt"
-	"goalgorithms/linearSort"
+	"goalgorithms/sort"
 )
 
 func main() {
-	// a := []int{5, 2, 8, 7, 4, 6, 1, 3}
-	// sort.Mergesort(a, 0, len(a)-1)
-	// sort.Printmat(a, len(a))
+	// a := []int{8, 2, 5, 7, 4, 6, 3, 1}
+	// a := []int{25, 13, 2, 4, 7, 17, 20, 8, 15}
+	a := []int{-8, 4, 67, 90, 13, 54, 21}
+	fmt.Println(a)
+	sort.InitQuicksort(a, len(a))
+	fmt.Println(a)
+	// rand.Seed(time.Now().UnixNano())
+	// fmt.Println(rand.Intn(7))
+
 	// mdc := gcd.GcdEuclids(234, 357)
 	// fmt.Println(mdc)
 
@@ -22,7 +28,7 @@ func main() {
 	// i, j, max := arrayMax.SubArrayMax(a)
 	// fmt.Printf("[%d, %d] = %d\n", i, j, max)
 
-	a := []int{2, 1, 3, 4, 1, 2, 1, 5, 4}
-	b := linearSort.Countingsort(a, 5)
-	fmt.Println(b)
+	// a := []int{2, 1, 3, 4, 1, 2, 1, 5, 4}
+	// b := linearSort.Countingsort(a, 5)
+	// fmt.Println(b)
 }
