@@ -53,7 +53,7 @@ func buildHeap(a []int, n int) {
 }
 
 /*
-HeapSort sort a array heap max
+Heapsort sort a array heap max
 
 param:
 a: 	slice representing heap
