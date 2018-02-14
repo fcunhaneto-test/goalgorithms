@@ -1,4 +1,4 @@
-package arrayMaxs
+package arrayMax
 
 import (
 	"math"

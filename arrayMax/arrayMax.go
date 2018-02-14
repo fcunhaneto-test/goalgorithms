@@ -1,4 +1,4 @@
-package arrayMaxs
+package arrayMax
 
 // ArrayMax return the index and largest value of the array.
 func ArrayMax(a []int) (int, int) {
