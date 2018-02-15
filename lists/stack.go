@@ -34,9 +34,7 @@ func InitStack(list []int, length int) Stack {
 	return s
 }
 
-/*
-Push inserting element in the stack
-*/
+//Push inserting element in the stack
 func (s *Stack) Push(num int) (Stack, error) {
 	s.top++
 	if s.isStackFull() {
@@ -49,9 +47,7 @@ func (s *Stack) Push(num int) (Stack, error) {
 
 }
 
-/*
-Pop the last element inserted in the stack
-*/
+// Pop the last element inserted in the stack
 func (s *Stack) Pop() (int, error) {
 	s.top--
 	if s.isStackEmpty() {

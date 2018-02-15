@@ -2,9 +2,9 @@ package lists
 
 import (
 	"errors"
-	"fmt"
 )
 
+// Queue a queue struct
 type Queue struct {
 	a   []int
 	ini int
@@ -36,9 +36,7 @@ func InitQueue(list []int, length int) Queue {
 	return q
 }
 
-/*
-Enqueue inserting element in the queue
-*/
+//Enqueue inserting element in the queue
 func (q *Queue) Enqueue(num int) (Queue, error) {
 	q.end++
 	if q.isQueueFull() {
@@ -50,11 +48,8 @@ func (q *Queue) Enqueue(num int) (Queue, error) {
 	return *q, nil
 }
 
-/*
-Dequeue get the first element inserted in the queue
-*/
+// Dequeue get the first element inserted in the queue
 func (q *Queue) Dequeue() (int, error) {
-	fmt.Println("dequeue =", q.ini, q.end)
 	if q.isQueueEmpty() {
 		return 0, errors.New("Queue is empty")
 	}
@@ -72,7 +67,6 @@ func (q *Queue) isQueueFull() bool {
 }
 
 func (q *Queue) isQueueEmpty() bool {
-	fmt.Println("isQueueEmpty =", q.ini, q.end)
 	if q.ini <= q.end {
 		return false
 	}
