@@ -39,7 +39,7 @@ func InitQueue(list []int, length int) Queue {
 //Enqueue inserting element in the queue
 func (q *Queue) Enqueue(num int) (Queue, error) {
 	q.end++
-	if q.isQueueFull() {
+	if q.isFull() {
 		return *q, errors.New("Queue is full")
 	}
 
@@ -50,7 +50,7 @@ func (q *Queue) Enqueue(num int) (Queue, error) {
 
 // Dequeue get the first element inserted in the queue
 func (q *Queue) Dequeue() (int, error) {
-	if q.isQueueEmpty() {
+	if q.isEmpty() {
 		return 0, errors.New("Queue is empty")
 	}
 
@@ -58,7 +58,7 @@ func (q *Queue) Dequeue() (int, error) {
 	return q.a[q.ini-1], nil
 }
 
-func (q *Queue) isQueueFull() bool {
+func (q *Queue) isFull() bool {
 	if q.end < len(q.a) {
 		return false
 	}
@@ -66,7 +66,7 @@ func (q *Queue) isQueueFull() bool {
 	return true
 }
 
-func (q *Queue) isQueueEmpty() bool {
+func (q *Queue) isEmpty() bool {
 	if q.ini <= q.end {
 		return false
 	}
