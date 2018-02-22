@@ -1,7 +1,7 @@
 package main
 
 import (
-	"goalgorithms/ex_linklist"
+	"goalgorithms/exlinklist"
 )
 
 func main() {
@@ -51,7 +51,7 @@ func main() {
 	// 	fmt.Println("Size:", s.Size())
 	// }
 
-	var start, current ex_linklist.Person
+	var start, current exlinklist.Person
 	start.ID = 0
 	start.Next = &current
 	start.Previ = nil
@@ -60,10 +60,10 @@ func main() {
 	current.Previ = &start
 	current.Next = nil
 
-	current = ex_linklist.InsertP(1, start)
-	current = ex_linklist.InsertP(2, current)
-	current = ex_linklist.InsertP(3, current)
-	current = ex_linklist.InsertP(4, current)
+	current = exlinklist.InsertP(1, start)
+	current = exlinklist.InsertP(2, current)
+	current = exlinklist.InsertP(3, current)
+	current = exlinklist.InsertP(4, current)
 
-	ex_linklist.PrintP(current)
+	exlinklist.PrintP(current)
 }
