@@ -26,25 +26,25 @@ func InitBT(v int) BT {
 }
 
 //InsertBT insert a value in binary tree
-func InsertBT(v int, atual BT) {
+func InsertBT(v int, current BT) {
 	var bt BinaryTree
 	bt.val = v
 	bt.left = nil
 	bt.right = nil
 
 	for true {
-		if bt.val < atual.val {
-			if atual.left != nil {
-				atual = atual.left
+		if bt.val < current.val {
+			if current.left != nil {
+				current = current.left
 			} else {
-				atual.left = &bt
+				current.left = &bt
 				break
 			}
 		} else {
-			if atual.right != nil {
-				atual = atual.right
+			if current.right != nil {
+				current = current.right
 			} else {
-				atual.right = &bt
+				current.right = &bt
 				break
 			}
 		}
@@ -52,45 +52,69 @@ func InsertBT(v int, atual BT) {
 }
 
 // SearchInBT search a value in binary tree
-func SearchInBT(num int, atual BT) BT {
-	for atual != nil {
-		if num == atual.val {
-			return atual
-		} else if num < atual.val {
-			atual = atual.left
+func SearchInBT(num int, current BT) int {
+	for current != nil {
+		if num == current.val {
+			return current.val
+		} else if num < current.val {
+			current = current.left
 		} else {
-			atual = atual.right
+			current = current.right
 		}
 	}
 
-	return nil
+	return 0
+}
+
+// MinimumBT return currentmun value in binary tree
+func MinimumBT(current BT) int {
+	var num int
+	for current != nil {
+		num = current.val
+		current = current.left
+	}
+
+	return num
+}
+
+// MaximumBT return currentmun value in binary tree
+func MaximumBT(current BT) int {
+	var num int
+	for current != nil {
+		num = current.val
+		current = current.right
+	}
+
+	return num
 }
 
 // PrintBT  print all binary tree
-func PrintBT(atual BT) {
-	if atual != nil {
-		fmt.Println(atual)
-		PrintBT(atual.left)
-		PrintBT(atual.right)
+func PrintBT(current BT) {
+	if current != nil {
+		fmt.Println(current)
+		PrintBT(current.left)
+		PrintBT(current.right)
 	}
 }
 
 // PrintBTLeft print left side of binary tree
-func PrintBTLeft(atual BT) {
-	atual = atual.left
-	if atual != nil {
-		fmt.Println(atual)
-		PrintBT(atual.left)
-		PrintBT(atual.right)
+func PrintBTLeft(current BT) {
+	fmt.Println(current)
+	current = current.left
+	if current != nil {
+		fmt.Println(current)
+		PrintBT(current.left)
+		PrintBT(current.right)
 	}
 }
 
 // PrintBTRight  print right side of binary tree
-func PrintBTRight(atual BT) {
-	atual = atual.right
-	if atual != nil {
-		fmt.Println(atual)
-		PrintBT(atual.left)
-		PrintBT(atual.right)
+func PrintBTRight(current BT) {
+	fmt.Println(current)
+	current = current.right
+	if current != nil {
+		fmt.Println(current)
+		PrintBT(current.left)
+		PrintBT(current.right)
 	}
 }

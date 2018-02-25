@@ -31,21 +31,22 @@ func main() {
 
 	var num int
 	var root binarytree.BT
-	fmt.Println("Enter the root:")
-	fmt.Scanf("%d", &num)
-	root = binarytree.InitBT(num)
-	fmt.Print("Enter the binary tree values:")
-	_, err := fmt.Scanf("%d", &num)
-	if err != nil {
-		fmt.Println(err)
-	}
-	for num != 0 {
-		binarytree.InsertBT(num, root)
-		fmt.Print("Enter the binary tree value (0 to exit):")
-		_, err := fmt.Scanf("%d", &num)
-		if err != nil {
-			fmt.Println(err)
-		}
+	// fmt.Println("Enter the root:")
+	// fmt.Scanf("%d", &num)
+	root = binarytree.InitBT(11)
+	// fmt.Print("Enter the binary tree values:")
+	// _, err := fmt.Scanf("%d", &num)
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
+	a := []int{6, 19, 4, 8, 17, 43, 49, 10, 31, 5}
+	for i := 0; i < len(a); i++ {
+		binarytree.InsertBT(a[i], root)
+		// fmt.Print("Enter the binary tree value (0 to exit):")
+		// _, err := fmt.Scanf("%d", &num)
+		// if err != nil {
+		// 	fmt.Println(err)
+		// }
 	}
 	binarytree.PrintBT(root)
 	fmt.Println("***********************************")
@@ -53,11 +54,15 @@ func main() {
 	fmt.Println("***********************************")
 	binarytree.PrintBTRight(root)
 	fmt.Println("***********************************")
-	fmt.Print("Enter a number to find:")
-	_, err = fmt.Scanf("%d", &num)
-	if err != nil {
-		fmt.Println(err)
-	}
-	bt := binarytree.SearchInBT(num, root)
-	fmt.Println(bt)
+	// fmt.Print("Enter a number to find:")
+	// _, err := fmt.Scanf("%d", &num)
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
+	// num = binarytree.SearchInBT(num, root)
+	// fmt.Println("Find:", num)
+	num = binarytree.MinimumBT(root)
+	fmt.Println("Minimum:", num)
+	num = binarytree.MaximumBT(root)
+	fmt.Println("Maximum:", num)
 }
