@@ -16,8 +16,8 @@ type BinaryTree struct {
 // BT alias for binary tree struct
 type BT = *BinaryTree
 
-// InitBt starts the binary tree by placing the root element
-func InitBt(v int) BT {
+// BtInit starts the binary tree by placing the root element
+func BtInit(v int) BT {
 	var root BinaryTree
 
 	root.Val = v
@@ -28,8 +28,8 @@ func InitBt(v int) BT {
 	return &root
 }
 
-// InsertBt insert a Value in binary tree
-func (current BT) InsertBt(v int) {
+// BtInsert insert a Value in binary tree
+func (current BT) BtInsert(v int) {
 	var bt BinaryTree
 	bt.Val = v
 	bt.left = nil
@@ -56,8 +56,8 @@ func (current BT) InsertBt(v int) {
 	}
 }
 
-// SearchInBt search a Value in binary tree
-func (current BT) SearchInBt(num int) (BT, error) {
+// BtSearchNode search a Value in binary tree
+func (current BT) BtSearchNode(num int) (BT, error) {
 	for current != nil {
 		if num == current.Val {
 			return current, nil
@@ -71,8 +71,8 @@ func (current BT) SearchInBt(num int) (BT, error) {
 	return nil, err
 }
 
-// MinimumBt return currentmun Value in binary tree
-func (current BT) MinimumBt() BT {
+// BtMinimum return currentmun Value in binary tree
+func (current BT) BtMinimum() BT {
 	for current.left != nil {
 		current = current.left
 	}
@@ -80,8 +80,8 @@ func (current BT) MinimumBt() BT {
 	return current
 }
 
-// MaximumBt return currentmun Value in binary tree
-func (current BT) MaximumBt() BT {
+// BtMaximum return currentmun Value in binary tree
+func (current BT) BtMaximum() BT {
 	for current.right != nil {
 		current = current.right
 	}
@@ -89,8 +89,8 @@ func (current BT) MaximumBt() BT {
 	return current
 }
 
-// SuccessorBt successor of current node
-func (current BT) SuccessorBt() BT {
+// BtNodeSuccessor successor of current node
+func (current BT) BtNodeSuccessor() BT {
 	var bt BT
 	if current.right != nil {
 		current = current.right
@@ -110,8 +110,8 @@ func (current BT) SuccessorBt() BT {
 	return bt
 }
 
-// PredecessorBt successor of current node
-func (current BT) PredecessorBt() BT {
+// BtNodePredecessor successor of current node
+func (current BT) BtNodePredecessor() BT {
 	var bt BT
 	if current.left != nil {
 		current = current.left
@@ -131,19 +131,19 @@ func (current BT) PredecessorBt() BT {
 	return bt
 }
 
-// PrintBtAll  print all binary tree
-func (current BT) PrintBtAll() {
+// BtPrintAll  print all binary tree
+func (current BT) BtPrintAll() {
 	printBT(current)
 }
 
-// PrintBtLeft print left side of binary tree
-func (current BT) PrintBtLeft() {
+// BtPrintLeft print left side of binary tree
+func (current BT) BtPrintLeft() {
 	current = current.left
 	printBT(current)
 }
 
-// PrintBtRight  print right side of binary tree
-func (current BT) PrintBtRight() {
+// BtPrintRight  print right side of binary tree
+func (current BT) BtPrintRight() {
 	current = current.right
 	printBT(current)
 }
