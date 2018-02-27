@@ -1,42 +1,46 @@
 package binarytree
 
 import (
+	"errors"
 	"fmt"
 )
 
 // BinaryTree a binary tree representation of integers
 type BinaryTree struct {
-	val   int
-	left  *BinaryTree
-	right *BinaryTree
+	Val    int
+	left   *BinaryTree
+	right  *BinaryTree
+	parent *BinaryTree
 }
 
 // BT alias for binary tree struct
 type BT = *BinaryTree
 
-// InitBT starts the binary tree by placing the root element
-func InitBT(v int) BT {
+// InitBt starts the binary tree by placing the root element
+func InitBt(v int) BT {
 	var root BinaryTree
 
-	root.val = v
+	root.Val = v
 	root.left = nil
 	root.right = nil
+	root.parent = nil
 
 	return &root
 }
 
-//InsertBT insert a value in binary tree
-func InsertBT(v int, current BT) {
+// InsertBt insert a Value in binary tree
+func (current BT) InsertBt(v int) {
 	var bt BinaryTree
-	bt.val = v
+	bt.Val = v
 	bt.left = nil
 	bt.right = nil
 
 	for true {
-		if bt.val < current.val {
+		if bt.Val < current.Val {
 			if current.left != nil {
 				current = current.left
 			} else {
+				bt.parent = current
 				current.left = &bt
 				break
 			}
@@ -44,6 +48,7 @@ func InsertBT(v int, current BT) {
 			if current.right != nil {
 				current = current.right
 			} else {
+				bt.parent = current
 				current.right = &bt
 				break
 			}
@@ -51,70 +56,81 @@ func InsertBT(v int, current BT) {
 	}
 }
 
-// SearchInBT search a value in binary tree
-func SearchInBT(num int, current BT) int {
+// SearchInBt search a Value in binary tree
+func (current BT) SearchInBt(num int) (BT, error) {
 	for current != nil {
-		if num == current.val {
-			return current.val
-		} else if num < current.val {
+		if num == current.Val {
+			return current, nil
+		} else if num < current.Val {
 			current = current.left
 		} else {
 			current = current.right
 		}
 	}
-
-	return 0
+	err := errors.New("Not found")
+	return nil, err
 }
 
-// MinimumBT return currentmun value in binary tree
-func MinimumBT(current BT) int {
-	var num int
-	for current != nil {
-		num = current.val
+// MinimumBt return currentmun Value in binary tree
+func (current BT) MinimumBt() BT {
+	for current.left != nil {
 		current = current.left
 	}
 
-	return num
+	return current
 }
 
-// MaximumBT return currentmun value in binary tree
-func MaximumBT(current BT) int {
-	var num int
-	for current != nil {
-		num = current.val
+// MaximumBt return currentmun Value in binary tree
+func (current BT) MaximumBt() BT {
+	for current.right != nil {
 		current = current.right
 	}
 
-	return num
+	return current
 }
 
-// PrintBT  print all binary tree
-func PrintBT(current BT) {
-	if current != nil {
-		fmt.Println(current)
-		PrintBT(current.left)
-		PrintBT(current.right)
+// SuccessorBt successor of current node
+func (current BT) SuccessorBt() BT {
+	var bt BT
+	if current.right != nil {
+		current = current.right
+		for current.left != nil {
+			current = current.left
+		}
+
+		return current
 	}
+
+	bt = current.parent
+	for bt != nil && (current == bt.right) {
+		current = bt
+		bt = bt.parent
+	}
+
+	return bt
 }
 
-// PrintBTLeft print left side of binary tree
-func PrintBTLeft(current BT) {
-	fmt.Println(current)
+// PrintBtAll  print all binary tree
+func (current BT) PrintBtAll() {
+	printBT(current)
+}
+
+// PrintBtLeft print left side of binary tree
+func (current BT) PrintBtLeft() {
 	current = current.left
-	if current != nil {
-		fmt.Println(current)
-		PrintBT(current.left)
-		PrintBT(current.right)
-	}
+	printBT(current)
 }
 
-// PrintBTRight  print right side of binary tree
-func PrintBTRight(current BT) {
-	fmt.Println(current)
+// PrintBtRight  print right side of binary tree
+func (current BT) PrintBtRight() {
 	current = current.right
+	printBT(current)
+}
+
+func printBT(current BT) {
 	if current != nil {
-		fmt.Println(current)
-		PrintBT(current.left)
-		PrintBT(current.right)
+		printBT(current.left)
+		fmt.Printf("%v - %p\n", *current, current)
+		printBT(current.right)
 	}
 }

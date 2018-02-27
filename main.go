@@ -14,55 +14,40 @@ func main() {
 	// a := []int{0, 13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7}
 	// a := []int{2, 1, 3, 4, 1, 2, 1, 5, 4}
 
-	// var start, current exlinklist.Person
-	// start.ID = 0
-	// start.Next = &current
-	// start.Previ = nil
-	// current.ID = 0
-	// current.Next = nil
-	// current.Previ = &start
-	// current.Next = nil
-
-	// current = exlinklist.InsertP(1, start)
-	// current = exlinklist.InsertP(2, current)
-	// current = exlinklist.InsertP(3, current)
-	// current = exlinklist.InsertP(4, current)
-	// exlinklist.PrintP(current)
-
 	var num int
-	var root binarytree.BT
-	// fmt.Println("Enter the root:")
-	// fmt.Scanf("%d", &num)
-	root = binarytree.InitBT(11)
-	// fmt.Print("Enter the binary tree values:")
-	// _, err := fmt.Scanf("%d", &num)
-	// if err != nil {
-	// 	fmt.Println(err)
-	// }
-	a := []int{6, 19, 4, 8, 17, 43, 49, 10, 31, 5}
+	var root, current binarytree.BT
+	a := []int{6, 18, 3, 7, 17, 20, 2, 4, 13, 9}
+
+	root = binarytree.InitBt(15)
+
 	for i := 0; i < len(a); i++ {
-		binarytree.InsertBT(a[i], root)
-		// fmt.Print("Enter the binary tree value (0 to exit):")
-		// _, err := fmt.Scanf("%d", &num)
-		// if err != nil {
-		// 	fmt.Println(err)
-		// }
+		root.InsertBt(a[i])
 	}
-	binarytree.PrintBT(root)
+
+	root.PrintBtAll()
 	fmt.Println("***********************************")
-	binarytree.PrintBTLeft(root)
+	root.PrintBtLeft()
 	fmt.Println("***********************************")
-	binarytree.PrintBTRight(root)
+	root.PrintBtRight()
 	fmt.Println("***********************************")
-	// fmt.Print("Enter a number to find:")
-	// _, err := fmt.Scanf("%d", &num)
-	// if err != nil {
-	// 	fmt.Println(err)
-	// }
-	// num = binarytree.SearchInBT(num, root)
-	// fmt.Println("Find:", num)
-	num = binarytree.MinimumBT(root)
-	fmt.Println("Minimum:", num)
-	num = binarytree.MaximumBT(root)
-	fmt.Println("Maximum:", num)
+
+	fmt.Print("Enter a number to find: ")
+	_, err := fmt.Scanf("%d", &num)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	current, err = root.SearchInBt(num)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println("Find:", current)
+
+	current = current.SuccessorBt()
+	fmt.Println("Successor:", current)
+
+	current = root.MinimumBt()
+	fmt.Println("Minimum:", current.Val)
+	current = root.MaximumBt()
+	fmt.Println("Maximum:", current.Val)
 }
