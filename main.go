@@ -43,7 +43,7 @@ func main() {
 	}
 	fmt.Println("Find:", current)
 
-	current = current.SuccessorBt()
+	current = current.PredecessorBt()
 	fmt.Println("Successor:", current)
 
 	current = root.MinimumBt()

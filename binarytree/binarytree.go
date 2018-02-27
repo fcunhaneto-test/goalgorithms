@@ -110,6 +110,27 @@ func (current BT) SuccessorBt() BT {
 	return bt
 }
 
+// PredecessorBt successor of current node
+func (current BT) PredecessorBt() BT {
+	var bt BT
+	if current.left != nil {
+		current = current.left
+		for current.right != nil {
+			current = current.right
+		}
+
+		return current
+	}
+
+	bt = current.parent
+	for bt != nil && (current == bt.left) {
+		current = bt
+		bt = bt.parent
+	}
+
+	return bt
+}
+
 // PrintBtAll  print all binary tree
 func (current BT) PrintBtAll() {
 	printBT(current)
