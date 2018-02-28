@@ -21,7 +21,7 @@ func main() {
 	root = binarytree.BtInit(15)
 
 	for i := 0; i < len(a); i++ {
-		root.BtInsert(a[i])
+		root.BtInsertNode(a[i])
 	}
 
 	root.BtPrintAll()
@@ -43,8 +43,11 @@ func main() {
 	}
 	fmt.Println("Find:", current)
 
-	current = current.BtNodeSuccessor()
-	fmt.Println("Successor:", current)
+	current.BtDeleteNode()
+
+	root.BtPrintLeft()
+	// current = current.BtMinimum()
+	// fmt.Println("Minimun:", current)
 
 	fmt.Print("Enter a number to find: ")
 	_, err = fmt.Scanf("%d", &num)
@@ -65,4 +68,12 @@ func main() {
 	fmt.Println("Minimum:", current.Val)
 	current = root.BtMaximum()
 	fmt.Println("Maximum:", current.Val)
+
+	fmt.Println("***********************************")
+	root.BtPrintAll()
+	fmt.Println("***********************************")
+	root.BtPrintLeft()
+	fmt.Println("***********************************")
+	root.BtPrintRight()
+	fmt.Println("***********************************")
 }

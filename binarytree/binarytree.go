@@ -28,8 +28,8 @@ func BtInit(v int) BT {
 	return &root
 }
 
-// BtInsert insert a Value in binary tree
-func (current BT) BtInsert(v int) {
+// BtInsertNode insert a Value in binary tree
+func (current BT) BtInsertNode(v int) {
 	var bt BinaryTree
 	bt.Val = v
 	bt.left = nil
@@ -53,6 +53,40 @@ func (current BT) BtInsert(v int) {
 				break
 			}
 		}
+	}
+}
+
+// BtDeleteNode delete current node for binary tree
+func (current BT) BtDeleteNode() {
+	if current.left == nil {
+		btTransplant(current, current.right)
+	} else if current.right == nil {
+		btTransplant(current, current.left)
+	} else {
+		bt := current.right.BtMinimum()
+		if bt.parent != current {
+			btTransplant(bt, bt.right)
+			bt.right = current.right
+			bt.right.parent = bt
+		}
+		btTransplant(current, bt)
+		bt.left = current.left
+		bt.left.parent = bt
+	}
+}
+
+func btTransplant(u, v BT) {
+	if u.parent == nil {
+		u.parent = v
+	} else if u == u.parent.left {
+		u.parent.left = v
+
+	} else {
+		u.parent.right = v
+	}
+
+	if v != nil {
+		v.parent = u.parent
 	}
 }
 
