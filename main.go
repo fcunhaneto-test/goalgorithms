@@ -1,9 +1,6 @@
 package main
 
-import (
-	"fmt"
-	"goalgorithms/binarytree"
-)
+import "goalgorithms/linklist"
 
 type Person struct {
 	ID   int
@@ -30,86 +27,86 @@ func main() {
 	// fmt.Println(current)
 	// exlinklist.PrintP(current)
 
-	// var p Person
-	// var root, current linklist.Node
-	// p.ID = 1
-	// p.Name = "Francisco"
-	// root = linklist.InsertLL(p, root)
+	var p Person
+	var root, current *linklist.Node
+	p.ID = 1
+	p.Name = "Francisco"
+	root = linklist.InsertLL(p, root)
 
-	// p.ID = 2
-	// p.Name = "Erica"
-	// current = linklist.InsertLL(p, root)
-	// // fmt.Println(root)
-	// p.ID = 3
-	// p.Name = "João"
-	// current = linklist.InsertLL(p, current)
+	p.ID = 2
+	p.Name = "Erica"
+	current = linklist.InsertLL(p, root)
+	// fmt.Println(root)
+	p.ID = 3
+	p.Name = "João"
+	current = linklist.InsertLL(p, current)
 
-	// p.ID = 4
-	// p.Name = "Paula"
-	// current = linklist.InsertLL(p, current)
+	p.ID = 4
+	p.Name = "Paula"
+	current = linklist.InsertLL(p, current)
 
-	// linklist.PrintLL(current)
+	linklist.PrintLL(*current)
 
-	var num int
-	var root, current binarytree.BT
-	a := []int{6, 18, 3, 7, 17, 20, 2, 4, 13, 9}
+	// var num int
+	// var root, current binarytree.BT
+	// a := []int{6, 18, 3, 7, 17, 20, 2, 4, 13, 9}
 
-	root = binarytree.BtInit(15)
-	root.BtInsertNode(678)
-	for i := 0; i < len(a); i++ {
-		root.BtInsertNode(a[i])
-	}
+	// root = binarytree.BtInit(15)
+	// root.BtInsertNode(678)
+	// for i := 0; i < len(a); i++ {
+	// 	root.BtInsertNode(a[i])
+	// }
 
-	root.BtPrintAll()
-	fmt.Println("***********************************")
-	root.BtPrintLeft()
-	fmt.Println("***********************************")
-	root.BtPrintRight()
-	fmt.Println("***********************************")
+	// root.BtPrintAll()
+	// fmt.Println("***********************************")
+	// root.BtPrintLeft()
+	// fmt.Println("***********************************")
+	// root.BtPrintRight()
+	// fmt.Println("***********************************")
 
-	fmt.Print("Enter a number to find: ")
-	_, err := fmt.Scanf("%d", &num)
-	if err != nil {
-		fmt.Println(err)
-	}
+	// fmt.Print("Enter a number to find: ")
+	// _, err := fmt.Scanf("%d", &num)
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
 
-	current, err = root.BtSearchNode(num)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println("Find:", current)
+	// current, err = root.BtSearchNode(num)
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
+	// fmt.Println("Find:", current)
 
-	current.BtDeleteNode()
+	// current.BtDeleteNode()
 
-	root.BtPrintLeft()
-	// current = current.BtMinimum()
-	// fmt.Println("Minimun:", current)
+	// root.BtPrintLeft()
+	// // current = current.BtMinimum()
+	// // fmt.Println("Minimun:", current)
 
-	fmt.Print("Enter a number to find: ")
-	_, err = fmt.Scanf("%d", &num)
-	if err != nil {
-		fmt.Println(err)
-	}
+	// fmt.Print("Enter a number to find: ")
+	// _, err = fmt.Scanf("%d", &num)
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
 
-	current, err = root.BtSearchNode(num)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println("Find:", current)
+	// current, err = root.BtSearchNode(num)
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
+	// fmt.Println("Find:", current)
 
-	current = current.BtNodePredecessor()
-	fmt.Println("Predecessor:", current)
+	// current = current.BtNodePredecessor()
+	// fmt.Println("Predecessor:", current)
 
-	current = root.BtMinimum()
-	fmt.Println("Minimum:", current.Val)
-	current = root.BtMaximum()
-	fmt.Println("Maximum:", current.Val)
+	// current = root.BtMinimum()
+	// fmt.Println("Minimum:", current.Val)
+	// current = root.BtMaximum()
+	// fmt.Println("Maximum:", current.Val)
 
-	fmt.Println("***********************************")
-	root.BtPrintAll()
-	fmt.Println("***********************************")
-	root.BtPrintLeft()
-	fmt.Println("***********************************")
-	root.BtPrintRight()
-	fmt.Println("***********************************")
+	// fmt.Println("***********************************")
+	// root.BtPrintAll()
+	// fmt.Println("***********************************")
+	// root.BtPrintLeft()
+	// fmt.Println("***********************************")
+	// root.BtPrintRight()
+	// fmt.Println("***********************************")
 }

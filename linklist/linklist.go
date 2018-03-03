@@ -10,24 +10,25 @@ type Node struct {
 }
 
 // LLInit init list link
-func LLInit(v interface{}) Node {
-	var root Node
-
-	root.OB = v
-	root.Next = nil
-	root.Previ = nil
-
-	return root
+func LLInit(v interface{}) *Node {
+	node := &Node{
+		OB:    v,
+		Next:  nil,
+		Previ: nil,
+	}
+	return node
 }
 
 // InsertLL insert struct in link list
-func InsertLL(ob interface{}, current Node) Node {
-	var ll Node
-	ll.OB = ob
-	current.Next = &ll
-	ll.Previ = &current
+func InsertLL(ob interface{}, current *Node) *Node {
+	node := &Node{
+		OB:    ob,
+		Previ: current,
+	}
 
-	return ll
+	// current.Next = ll
+
+	return node
 }
 
 // PrintLL print linklist
