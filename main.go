@@ -32,13 +32,16 @@ func main() {
 
 	var p Person
 	var head, current linklist.LL
+
+	head = linklist.InitLL()
+
 	p.ID = 1
 	p.Name = "Francisco"
-	head = linklist.InitLL(p)
+	current = linklist.InsertLL(p, head)
 
 	p.ID = 2
 	p.Name = "Erica"
-	current = linklist.InsertLL(p, head)
+	current = linklist.InsertLL(p, current)
 
 	p.ID = 3
 	p.Name = "João"
@@ -51,6 +54,17 @@ func main() {
 	linklist.PrintLL(head)
 	fmt.Println()
 	linklist.PrintLLReverse(current)
+
+	fmt.Println()
+	current = head
+
+	for current.Next != nil {
+		current = linklist.GetNext(current)
+		p = current.V.(Person)
+		fmt.Println(p.ID)
+		fmt.Println(p.Name)
+	}
+
 	// var num int
 	// var root, current binarytree.BT
 	// a := []int{6, 18, 3, 7, 17, 20, 2, 4, 13, 9}

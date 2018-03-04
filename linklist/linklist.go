@@ -13,9 +13,9 @@ type Node struct {
 type LL = *Node
 
 // InitLL init list link
-func InitLL(v interface{}) LL {
+func InitLL() LL {
 	var head Node
-	head.V = v
+	head.V = nil
 	head.Next = nil
 	head.Previ = nil
 
@@ -33,9 +33,13 @@ func InsertLL(v interface{}, current LL) LL {
 	return &node
 }
 
+// GetNext get next node
+func GetNext(current LL) LL {
+	return current.Next
+}
+
 // PrintLL print link list
 func PrintLL(head LL) {
-	fmt.Println(head.V)
 	for head.Next != nil {
 		head = head.Next
 		fmt.Println(head.V)
@@ -47,6 +51,8 @@ func PrintLLReverse(current LL) {
 	fmt.Println(current.V)
 	for current.Previ != nil {
 		current = current.Previ
-		fmt.Println(current.V)
+		if current.V != nil {
+			fmt.Println(current.V)
+		}
 	}
 }
