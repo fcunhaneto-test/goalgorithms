@@ -4,37 +4,49 @@ import "fmt"
 
 // Node struct for link list
 type Node struct {
-	OB    interface{}
+	V     interface{}
 	Next  *Node
 	Previ *Node
 }
 
-// LLInit init list link
-func LLInit(v interface{}) *Node {
-	node := &Node{
-		OB:    v,
-		Next:  nil,
-		Previ: nil,
-	}
-	return node
+// LL link list
+type LL = *Node
+
+// InitLL init list link
+func InitLL(v interface{}) LL {
+	var head Node
+	head.V = v
+	head.Next = nil
+	head.Previ = nil
+
+	return &head
 }
 
 // InsertLL insert struct in link list
-func InsertLL(ob interface{}, current *Node) *Node {
-	node := &Node{
-		OB:    ob,
-		Previ: current,
-	}
+func InsertLL(v interface{}, current LL) LL {
+	var node Node
+	node.V = v
+	node.Next = nil
+	node.Previ = current
 
-	// current.Next = ll
-
-	return node
+	current.Next = &node
+	return &node
 }
 
-// PrintLL print linklist
-func PrintLL(current Node) {
+// PrintLL print link list
+func PrintLL(head LL) {
+	fmt.Println(head.V)
+	for head.Next != nil {
+		head = head.Next
+		fmt.Println(head.V)
+	}
+}
+
+// PrintLLReverse print link list in reverse order
+func PrintLLReverse(current LL) {
+	fmt.Println(current.V)
 	for current.Previ != nil {
-		fmt.Println(current.OB)
-		current = *current.Previ
+		current = current.Previ
+		fmt.Println(current.V)
 	}
 }

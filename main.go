@@ -1,6 +1,9 @@
 package main
 
-import "goalgorithms/linklist"
+import (
+	"fmt"
+	"goalgorithms/linklist"
+)
 
 type Person struct {
 	ID   int
@@ -28,15 +31,15 @@ func main() {
 	// exlinklist.PrintP(current)
 
 	var p Person
-	var root, current *linklist.Node
+	var head, current linklist.LL
 	p.ID = 1
 	p.Name = "Francisco"
-	root = linklist.InsertLL(p, root)
+	head = linklist.InitLL(p)
 
 	p.ID = 2
 	p.Name = "Erica"
-	current = linklist.InsertLL(p, root)
-	// fmt.Println(root)
+	current = linklist.InsertLL(p, head)
+
 	p.ID = 3
 	p.Name = "João"
 	current = linklist.InsertLL(p, current)
@@ -45,8 +48,9 @@ func main() {
 	p.Name = "Paula"
 	current = linklist.InsertLL(p, current)
 
-	linklist.PrintLL(*current)
-
+	linklist.PrintLL(head)
+	fmt.Println()
+	linklist.PrintLLReverse(current)
 	// var num int
 	// var root, current binarytree.BT
 	// a := []int{6, 18, 3, 7, 17, 20, 2, 4, 13, 9}
@@ -57,12 +61,12 @@ func main() {
 	// 	root.BtInsertNode(a[i])
 	// }
 
-	// root.BtPrintAll()
-	// fmt.Println("***********************************")
-	// root.BtPrintLeft()
-	// fmt.Println("***********************************")
-	// root.BtPrintRight()
-	// fmt.Println("***********************************")
+	// // root.BtPrintAll()
+	// // fmt.Println("***********************************")
+	// // root.BtPrintLeft()
+	// // fmt.Println("***********************************")
+	// // root.BtPrintRight()
+	// // fmt.Println("***********************************")
 
 	// fmt.Print("Enter a number to find: ")
 	// _, err := fmt.Scanf("%d", &num)
