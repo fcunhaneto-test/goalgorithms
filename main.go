@@ -5,11 +5,6 @@ import (
 	"goalgorithms/linklist"
 )
 
-type Person struct {
-	ID   int
-	Name string
-}
-
 func main() {
 	// a := []int{8, 2, 5, 7, 4, 6, 3, 1}
 	// a := []int{25, 13, 2, 4, 7, 17, 20, 8, 15}
@@ -30,40 +25,68 @@ func main() {
 	// fmt.Println(current)
 	// exlinklist.PrintP(current)
 
-	var p Person
-	var head, current linklist.LL
-
-	head = linklist.InitLL()
+	var p linklist.Person
+	var head, tail, current linklist.LL
+	var head1, tail1 linklist.LL
+	// head = linklist.LlInit()
 
 	p.ID = 1
 	p.Name = "Francisco"
-	current = linklist.InsertLL(p, head)
+	head = linklist.LlInit(p)
 
 	p.ID = 2
 	p.Name = "Erica"
-	current = linklist.InsertLL(p, current)
+	tail = linklist.LlInsertTail(p, head)
 
 	p.ID = 3
 	p.Name = "João"
-	current = linklist.InsertLL(p, current)
+	tail = linklist.LlInsertTail(p, tail)
 
 	p.ID = 4
 	p.Name = "Paula"
-	current = linklist.InsertLL(p, current)
+	tail = linklist.LlInsertTail(p, tail)
 
-	linklist.PrintLL(head)
+	// fmt.Println(head)
+	// linklist.LlPrint(head)
+	// fmt.Println()
+	// linklist.LlPrintReverse(current)
+	// fmt.Println("head:", head)
+	// fmt.Println()
+
+	current, _ = linklist.LlFindFromHead(3, head)
+
+	p.ID = 5
+	p.Name = "Rachel"
+	head1 = linklist.LlInit(p)
+
+	p.ID = 6
+	p.Name = "Tercio"
+	tail1 = linklist.LlInsertTail(p, head1)
+
+	// linklist.LlPrint(head)
+	// fmt.Println()
+	// linklist.LlPrintReverse(tail)
+	// fmt.Println()
+	// linklist.LlPrint(head1)
+	// fmt.Println()
+	// linklist.LlPrintReverse(tail1)
+	// fmt.Println()
+
+	linklist.LlInsertLlAfter(head1, tail1, current)
+
 	fmt.Println()
-	linklist.PrintLLReverse(current)
-
+	linklist.LlPrint(head)
 	fmt.Println()
-	current = head
+	linklist.LlPrintReverse(tail)
+	fmt.Println()
 
-	for current.Next != nil {
-		current = linklist.GetNext(current)
-		p = current.V.(Person)
-		fmt.Println(p.ID)
-		fmt.Println(p.Name)
-	}
+	// fmt.Println()
+	// for current.Next != nil {
+	// 	current = linklist.LlGetNext(current)
+	// 	p = current.V.(Person)
+	// 	fmt.Println(p.ID)
+	// 	fmt.Println(p.Name)
+	// }
 
 	// var num int
 	// var root, current binarytree.BT
@@ -127,4 +150,9 @@ func main() {
 	// fmt.Println("***********************************")
 	// root.BtPrintRight()
 	// fmt.Println("***********************************")
+
+	// var n int
+	// fmt.Println("Entre com um numero:")
+	// fmt.Scanf("%d", &n)
+	// fmt.Println(n)
 }
