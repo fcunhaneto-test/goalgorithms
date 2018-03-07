@@ -20,147 +20,141 @@ type Node struct {
 // LL link list
 type LL = *Node
 
-// LlInit init list link
-func LlInit(v interface{}) LL {
-	var head Node
-	head.V = v
-	head.Next = nil
+// head are head of link list
+var head = &Node{nil, nil, nil}
+
+// tail are tail of link list
+var tail = &Node{nil, nil, nil}
+
+func init() {
+	head.V = nil
+	head.Next = tail
 	head.Previ = nil
 
-	return &head
+	tail.V = nil
+	tail.Next = nil
+	tail.Previ = head
 }
 
-// LlInsertTail insert struct in tail of link list
+// LlInit init list link
+func LlInit(v interface{}) LL {
+	var node Node
+	node.V = v
+	node.Next = tail
+	node.Previ = head
+
+	head.Next = &node
+	tail.Previ = &node
+
+	return &node
+}
+
+// LlInsertTail insert node in tail of link list
 func LlInsertTail(v interface{}, current LL) LL {
 	var node Node
+
 	node.V = v
-	node.Next = nil
+	node.Next = tail
 	node.Previ = current
-
 	current.Next = &node
+	tail.Previ = &node
+
 	return &node
 }
 
-// LlInsertHead insert struct in head of link list
-func LlInsertHead(v interface{}, head LL) LL {
-	var node Node
-	node.V = v
-	node.Next = head
-	node.Previ = nil
+// GetHead return the head of link lists
+func GetHead() LL {
+	return head.Next
+}
 
-	head.Previ = &node
+// GetTail return the tail of link lists
+func GetTail() LL {
+	return tail.Previ
+}
+
+// LlInsertBefore insert node before current node
+func LlInsertBefore(v interface{}, current LL) LL {
+	var node Node
+
+	node.V = v
+	if current.Previ == head {
+		node.Next = current
+		node.Previ = head
+
+		head.Next = &node
+		current.Previ = &node
+	} else {
+		node.Next = current
+		node.Previ = current.Previ
+
+		current.Previ.Next = &node
+		current.Previ = &node
+	}
+
 	return &node
-}
-
-// LlInsertAfter insert node after given node
-func LlInsertAfter(v interface{}, after LL) {
-	var node Node
-	node.V = v
-	node.Next = after.Next
-	node.Previ = after
-
-	after.Next.Previ = &node
-	after.Next = &node
-}
-
-// LlInsertLlAfter insert link lists after given node
-func LlInsertLlAfter(head LL, tail LL, node LL) {
-	tail.Next = node.Next
-	node.Next.Previ = tail
-	node.Next = head
-	head.Previ = node
 }
 
 // LlDeleteNode delete node in link list
 func LlDeleteNode(node LL) {
-	previ := node.Previ
-	next := node.Next
+	if node.Previ == head {
+		head.Next = node.Next
+		node.Next.Previ = head
+	} else if node.Next == tail {
+		tail.Previ = node.Previ
+		node.Previ.Next = tail
+	} else {
+		// previ := node.Previ
+		// next := node.Next
 
-	previ.Next = next
-	next.Previ = previ
+		node.Previ.Next = node.Next
+		node.Next.Previ = node.Previ
+	}
 
 	node.V = nil
 	node.Next = nil
 	node.Previ = nil
 }
 
-// LlDeleteHead delete node in link list
-func LlDeleteHead(head LL) LL {
+// LlFind find node in link list
+func LlFind(n int) LL {
+	var person Person
 	node := head.Next
-	node.Previ = nil
 
-	head.V = nil
-	head.Next = nil
-	head.Previ = nil
-
-	return node
-}
-
-// LlFindFromHead find node from the head to tail
-func LlFindFromHead(n int, head LL) LL {
-	var node Person
-
-	node = head.V.(Person)
-	if n == node.ID {
-		return head
-	}
-
-	for head.Next != nil {
-		head = head.Next
-		node = head.V.(Person)
-
-		if n == node.ID {
-			return head
+	for node.Next != nil {
+		person = node.V.(Person)
+		if n == person.ID {
+			return node
 		}
+
+		node = node.Next
 	}
 	return nil
-}
-
-// LlFindFromTail find node from the tail to head
-func LlFindFromTail(n int, tail LL) LL {
-	var node Person
-
-	node = tail.V.(Person)
-	if n == node.ID {
-		return tail
-	}
-
-	for tail.Previ != nil {
-		tail = tail.Previ
-		node = tail.V.(Person)
-		if n == node.ID {
-			return tail
-		}
-	}
-	return nil
-}
-
-// LlGetPrevi get previous node
-func LlGetPrevi(current LL) LL {
-	return current.Previ
-}
-
-// LlGetNext get next node
-func LlGetNext(current LL) LL {
-	return current.Next
 }
 
 // LlPrint print link list
-func LlPrint(head LL) {
-	fmt.Println(head.V)
-	for head.Next != nil {
-		head = head.Next
-		fmt.Println(head.V)
+func LlPrint() {
+	var node LL
+	node = head.Next
+	fmt.Println(node.V)
+	for node.Next != nil {
+		node = node.Next
+		if node.Next != nil {
+			fmt.Println(node.V)
+		}
 	}
 }
 
 // LlPrintReverse print link list in reverse order
-func LlPrintReverse(current LL) {
-	fmt.Println(current.V)
-	for current.Previ != nil {
-		current = current.Previ
-		if current.V != nil {
-			fmt.Println(current.V)
+func LlPrintReverse() {
+	var node LL
+	node = tail.Previ
+
+	fmt.Println(node.V)
+	for node.Previ != nil {
+		node = node.Previ
+
+		if node.Previ != nil {
+			fmt.Println(node.V)
 		}
 	}
 }

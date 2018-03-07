@@ -6,9 +6,9 @@ import (
 )
 
 func main() {
+	var s string
 	var p linklist.Person
 	var head, tail, current linklist.LL
-	var head1, tail1 linklist.LL
 
 	p.ID = 1
 	p.Name = "Francisco"
@@ -26,41 +26,69 @@ func main() {
 	p.Name = "Paula"
 	tail = linklist.LlInsertTail(p, tail)
 
-	current = linklist.LlFindFromHead(3, head)
+	fmt.Println()
+	linklist.LlPrint()
+	fmt.Println()
+	linklist.LlPrintReverse()
+	fmt.Println()
+	fmt.Scanf("%s", &s)
 
-	// linklist.DeleteNode(current)
-
-	fmt.Println()
-	linklist.LlPrint(head)
-	fmt.Println()
-	linklist.LlPrintReverse(tail)
-	fmt.Println()
+	current = linklist.LlFind(3)
+	fmt.Println("Find 3:", current)
 
 	p.ID = 5
 	p.Name = "Rachel"
-	head1 = linklist.LlInit(p)
+	current = linklist.LlInsertBefore(p, current)
+	// fmt.Printf("%v - %p\n", current.Previ, current.Previ)
+	// fmt.Printf("%v - %p\n", current, current)
+	// fmt.Printf("%v - %p\n", current.Next, current.Next)
+	fmt.Println()
+	linklist.LlPrint()
+	fmt.Println()
+	linklist.LlPrintReverse()
+	fmt.Scanf("%s", &s)
 
 	p.ID = 6
 	p.Name = "Tercio"
-	tail1 = linklist.LlInsertTail(p, head1)
-
-	linklist.LlInsertLlAfter(head1, tail1, current)
+	head = linklist.LlInsertBefore(p, head)
 
 	fmt.Println()
-	linklist.LlPrint(head)
+	linklist.LlPrint()
 	fmt.Println()
-	linklist.LlPrintReverse(tail)
-	fmt.Println()
+	linklist.LlPrintReverse()
+	fmt.Scanf("%s", &s)
 
-	current = linklist.LlFindFromHead(2, head)
+	current = linklist.LlFind(2)
+	fmt.Println("Find 2:", current)
 
 	linklist.LlDeleteNode(current)
 
 	fmt.Println()
-	linklist.LlPrint(head)
+	linklist.LlPrint()
 	fmt.Println()
-	linklist.LlPrintReverse(tail)
+	linklist.LlPrintReverse()
+	fmt.Scanf("%s", &s)
+
+	linklist.LlDeleteNode(head)
+	head = linklist.GetHead()
+	fmt.Println("Head:", head)
+
 	fmt.Println()
+	linklist.LlPrint()
+	fmt.Println()
+	linklist.LlPrintReverse()
+	fmt.Scanf("%s", &s)
+
+	linklist.LlDeleteNode(tail)
+
+	fmt.Println()
+	linklist.LlPrint()
+	fmt.Println()
+	linklist.LlPrintReverse()
+	fmt.Println()
+
+	tail = linklist.GetTail()
+	fmt.Println("Tail:", tail)
 
 	// fmt.Println()
 	// for current.Next != nil {
