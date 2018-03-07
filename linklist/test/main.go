@@ -6,29 +6,9 @@ import (
 )
 
 func main() {
-	// a := []int{8, 2, 5, 7, 4, 6, 3, 1}
-	// a := []int{25, 13, 2, 4, 7, 17, 20, 8, 15}
-	// a := []int{15, 13, 2, 25, 7, 17, 20, 8, 4}
-	// a := []int{-8, 4, 67, 90, 13, 54, 21}
-	// a := []int{-2, 1, -3, 4, -1, 2, 1, -5, 4}
-	// a := []int{0, 13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7}
-	// a := []int{2, 1, 3, 4, 1, 2, 1, 5, 4}
-
-	// var root, current exlinklist.Person
-	// root = exlinklist.InsertP(1, root)
-	// fmt.Println(root)
-	// current = exlinklist.InsertP(2, root)
-	// fmt.Println(current)
-	// current = exlinklist.InsertP(3, current)
-	// fmt.Println(current)
-	// current = exlinklist.InsertP(4, current)
-	// fmt.Println(current)
-	// exlinklist.PrintP(current)
-
 	var p linklist.Person
 	var head, tail, current linklist.LL
 	var head1, tail1 linklist.LL
-	// head = linklist.LlInit()
 
 	p.ID = 1
 	p.Name = "Francisco"
@@ -46,14 +26,15 @@ func main() {
 	p.Name = "Paula"
 	tail = linklist.LlInsertTail(p, tail)
 
-	// fmt.Println(head)
-	// linklist.LlPrint(head)
-	// fmt.Println()
-	// linklist.LlPrintReverse(current)
-	// fmt.Println("head:", head)
-	// fmt.Println()
+	current = linklist.LlFindFromHead(3, head)
 
-	current, _ = linklist.LlFindFromHead(3, head)
+	// linklist.DeleteNode(current)
+
+	fmt.Println()
+	linklist.LlPrint(head)
+	fmt.Println()
+	linklist.LlPrintReverse(tail)
+	fmt.Println()
 
 	p.ID = 5
 	p.Name = "Rachel"
@@ -63,16 +44,17 @@ func main() {
 	p.Name = "Tercio"
 	tail1 = linklist.LlInsertTail(p, head1)
 
-	// linklist.LlPrint(head)
-	// fmt.Println()
-	// linklist.LlPrintReverse(tail)
-	// fmt.Println()
-	// linklist.LlPrint(head1)
-	// fmt.Println()
-	// linklist.LlPrintReverse(tail1)
-	// fmt.Println()
-
 	linklist.LlInsertLlAfter(head1, tail1, current)
+
+	fmt.Println()
+	linklist.LlPrint(head)
+	fmt.Println()
+	linklist.LlPrintReverse(tail)
+	fmt.Println()
+
+	current = linklist.LlFindFromHead(2, head)
+
+	linklist.LlDeleteNode(current)
 
 	fmt.Println()
 	linklist.LlPrint(head)

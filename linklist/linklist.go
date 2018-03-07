@@ -1,7 +1,6 @@
 package linklist
 
 import (
-	"errors"
 	"fmt"
 )
 
@@ -72,42 +71,68 @@ func LlInsertLlAfter(head LL, tail LL, node LL) {
 	head.Previ = node
 }
 
-// LlFindFromHead find node from the head to tail
-func LlFindFromHead(n int, head LL) (LL, error) {
-	var node Person
-	err := errors.New("Not found")
-	node = head.V.(Person)
+// LlDeleteNode delete node in link list
+func LlDeleteNode(node LL) {
+	previ := node.Previ
+	next := node.Next
 
+	previ.Next = next
+	next.Previ = previ
+
+	node.V = nil
+	node.Next = nil
+	node.Previ = nil
+}
+
+// LlDeleteHead delete node in link list
+func LlDeleteHead(head LL) LL {
+	node := head.Next
+	node.Previ = nil
+
+	head.V = nil
+	head.Next = nil
+	head.Previ = nil
+
+	return node
+}
+
+// LlFindFromHead find node from the head to tail
+func LlFindFromHead(n int, head LL) LL {
+	var node Person
+
+	node = head.V.(Person)
 	if n == node.ID {
-		return head, nil
+		return head
 	}
+
 	for head.Next != nil {
 		head = head.Next
 		node = head.V.(Person)
 
 		if n == node.ID {
-			return head, nil
+			return head
 		}
 	}
-	return nil, err
+	return nil
 }
 
 // LlFindFromTail find node from the tail to head
-func LlFindFromTail(n int, tail LL) (LL, error) {
+func LlFindFromTail(n int, tail LL) LL {
 	var node Person
-	err := errors.New("Not found")
+
 	node = tail.V.(Person)
 	if n == node.ID {
-		return tail, nil
+		return tail
 	}
+
 	for tail.Previ != nil {
 		tail = tail.Previ
 		node = tail.V.(Person)
 		if n == node.ID {
-			return tail, nil
+			return tail
 		}
 	}
-	return nil, err
+	return nil
 }
 
 // LlGetPrevi get previous node
