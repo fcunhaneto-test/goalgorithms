@@ -30,7 +30,7 @@ func main() {
 	linklist.LlPrint()
 	fmt.Println()
 	linklist.LlPrintReverse()
-	fmt.Println()
+	fmt.Println("Type enter to continue:")
 	fmt.Scanf("%s", &s)
 
 	current = linklist.LlFind(3)
@@ -46,6 +46,7 @@ func main() {
 	linklist.LlPrint()
 	fmt.Println()
 	linklist.LlPrintReverse()
+	fmt.Println("Type enter to continue:")
 	fmt.Scanf("%s", &s)
 
 	p.ID = 6
@@ -56,6 +57,7 @@ func main() {
 	linklist.LlPrint()
 	fmt.Println()
 	linklist.LlPrintReverse()
+	fmt.Println("Type enter to continue:")
 	fmt.Scanf("%s", &s)
 
 	current = linklist.LlFind(2)
@@ -67,6 +69,7 @@ func main() {
 	linklist.LlPrint()
 	fmt.Println()
 	linklist.LlPrintReverse()
+	fmt.Println("Type enter to continue:")
 	fmt.Scanf("%s", &s)
 
 	linklist.LlDeleteNode(head)
@@ -77,6 +80,7 @@ func main() {
 	linklist.LlPrint()
 	fmt.Println()
 	linklist.LlPrintReverse()
+	fmt.Println("Type enter to continue:")
 	fmt.Scanf("%s", &s)
 
 	linklist.LlDeleteNode(tail)
