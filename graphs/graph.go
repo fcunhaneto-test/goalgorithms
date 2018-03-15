@@ -10,41 +10,62 @@ import (
 
 // Node of graph who values are integer
 type Node struct {
-	n   int
-	adj []int
+	N   int
+	Adj []int
 }
 
-// Nodes all nodes of graph
-type Nodes []Node
+type Graph struct {
+	G []Node
+}
 
-/*
-ReadNode first read an integer representing a node in graph then reads integers on the same space-separated line representing the adjacent nodes.
-Example:
-# Enter vertex:
-# 1
-# Enter the adjacent vertices:
-# 2 6 7 10 5
-*/
-func ReadNode() Node {
-	var num int
+func readNode(num int) Node {
 	var a []int
 	var node Node
 	var line []string
 	reader := bufio.NewReader(os.Stdin)
 
-	fmt.Println("Enter vertex:")
-	fmt.Scanf("%d", &num)
-	node.n = num
-
-	fmt.Println("Enter the adjacent vertices: ")
+	node.N = num
+	fmt.Println("Enter the adjacent nodes: ")
 	text, _ := reader.ReadString('\n')
 	text = text[:len(text)-1]
 
-	line = strings.Split(string(text), " ")
-	a = lineToInteger(line)
-	node.adj = a
+	if text != "" {
+		line = strings.Split(string(text), " ")
+		a = lineToInteger(line)
+		node.Adj = a
+	} else {
+		node.Adj = nil
+	}
 
 	return node
+}
+
+/*
+ReadGraph first read an integer representing a number of nodes in graph, then read integer representing node number, then reads integers on the same space-separated line representing the adjacent nodes.
+Example:
+# Enter the number of nodes:
+# 5
+#"Enter node:
+# 1
+# Enter the adjacent nodes:
+# 3 4 5
+*/
+func ReadGraph() Graph {
+	var n, num int
+	var graph Graph
+	fmt.Println("Enter the number of nodes: ")
+	fmt.Scanf("%d", &num)
+
+	graph.G = make([]Node, num)
+
+	for i := 0; i < num; i++ {
+		fmt.Println("Enter node: ")
+		fmt.Scanf("%d", &n)
+		node := readNode(n)
+		graph.G[i] = node
+	}
+
+	return graph
 }
 
 /*
@@ -68,8 +89,4 @@ func lineToInteger(line []string) []int {
 	}
 
 	return s
-}
-
-func BFS(node Nodes, n Node) {
-
 }

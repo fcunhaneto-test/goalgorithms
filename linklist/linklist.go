@@ -2,13 +2,8 @@ package linklist
 
 import (
 	"fmt"
+	"reflect"
 )
-
-// Person type person
-type Person struct {
-	ID   int
-	Name string
-}
 
 // Node struct for link list
 type Node struct {
@@ -117,12 +112,12 @@ func LlDeleteNode(node LL) {
 
 // LlFind find node in link list
 func LlFind(n int) LL {
-	var person Person
+	var num int
 	node := head.Next
 
 	for node.Next != nil {
-		person = node.V.(Person)
-		if n == person.ID {
+		num = int(reflect.ValueOf(node.V).Field(0).Int())
+		if num == n {
 			return node
 		}
 
