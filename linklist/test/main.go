@@ -20,6 +20,8 @@ func main() {
 	p.Name = "Francisco"
 	head = linklist.LlInit(p)
 
+	linklist.LlDeleteNode(head)
+
 	p.ID = 2
 	p.Name = "Erica"
 	tail = linklist.LlInsertTail(p, head)

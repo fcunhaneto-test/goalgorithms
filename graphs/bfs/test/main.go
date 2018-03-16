@@ -1,15 +1,12 @@
 package main
 
 import (
-	"fmt"
 	"goalgorithms/graphs"
+	"goalgorithms/graphs/bfs"
 )
 
 func main() {
-	var graph []graphs.Node
+	var graph graphs.Graph
 	graph = graphs.ReadGraph()
-
-	for i := 0; i < len(graph); i++ {
-		fmt.Println(graph)
-	}
+	bfs.BFS(graph, graph.G[0])
 }

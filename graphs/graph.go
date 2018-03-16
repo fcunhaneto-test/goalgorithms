@@ -14,6 +14,7 @@ type Node struct {
 	Adj []int
 }
 
+// Graph an array of all graphnodes
 type Graph struct {
 	G []Node
 }
