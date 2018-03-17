@@ -10,35 +10,34 @@ import (
 
 // Node of graph who values are integer
 type Node struct {
-	N   int
-	Adj []int
+	N   string
+	Adj []*Node
+	C   int
+	D   int
+	P   *Node
 }
 
 // Graph an array of all graphnodes
-type Graph struct {
-	G []Node
-}
+var Graph map[string]*Node
 
-func readNode(num int) Node {
-	var a []int
+func readNode(n *Node) {
 	var node Node
 	var line []string
 	reader := bufio.NewReader(os.Stdin)
 
-	node.N = num
-	fmt.Println("Enter the adjacent nodes: ")
+	fmt.Printf("Enter the adjacent nodes for node: %s\n", n.N)
 	text, _ := reader.ReadString('\n')
 	text = text[:len(text)-1]
 
 	if text != "" {
 		line = strings.Split(string(text), " ")
-		a = lineToInteger(line)
-		node.Adj = a
+		n.Adj = make([]*Node, len(line))
+		for i := 0; i < len(line); i++ {
+			n.Adj[i] = Graph[line[i]]
+		}
 	} else {
 		node.Adj = nil
 	}
-
-	return node
 }
 
 /*
@@ -51,22 +50,27 @@ Example:
 # Enter the adjacent nodes:
 # 3 4 5
 */
-func ReadGraph() Graph {
-	var n, num int
-	var graph Graph
+func ReadGraph() map[string]*Node {
+	var num int
+	var s string
 	fmt.Println("Enter the number of nodes: ")
 	fmt.Scanf("%d", &num)
 
-	graph.G = make([]Node, num)
+	Graph = make(map[string]*Node)
 
 	for i := 0; i < num; i++ {
 		fmt.Println("Enter node: ")
-		fmt.Scanf("%d", &n)
-		node := readNode(n)
-		graph.G[i] = node
+		fmt.Scanf("%s", &s)
+		node := new(Node)
+		node.N = s
+		Graph[s] = node
 	}
 
-	return graph
+	for _, n := range Graph {
+		readNode(n)
+	}
+
+	return Graph
 }
 
 /*

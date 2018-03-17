@@ -8,5 +8,7 @@ import (
 func main() {
 	graph := graphs.ReadGraph()
 
-	fmt.Println(graph)
+	for _, n := range graph {
+		fmt.Println(*n)
+	}
 }

@@ -11,5 +11,5 @@ func main() {
 	graph := graphs.ReadGraph()
 	fmt.Println("Enter the initial node:")
 	fmt.Scanf("%s", &s)
-	bfs.BFS(s)
+	bfs.BFS(graph, s)
 }

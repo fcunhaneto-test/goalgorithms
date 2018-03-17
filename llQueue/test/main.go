@@ -52,7 +52,7 @@ func main() {
 
 	for true {
 		node = llQueue.LlPop()
-		if node == nil {
+		if llQueue.LlEmpty() {
 			break
 		}
 		fmt.Println(node.(Person))

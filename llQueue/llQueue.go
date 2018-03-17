@@ -67,13 +67,22 @@ func LlPush(v interface{}) {
 
 // LlPop remove node from queue
 func LlPop() interface{} {
-	if head.Next == tail {
+	if LlEmpty() {
 		return nil
 	}
 	node := *head.Next
 	llDeleteNode(head.Next)
 
 	return node.V
+}
+
+// LlEmpty check if the list is empty
+func LlEmpty() bool {
+	if head.Next == tail {
+		return true
+	}
+
+	return false
 }
 
 // LlDeleteNode delete node in link list
