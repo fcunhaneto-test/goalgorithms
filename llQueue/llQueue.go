@@ -67,9 +67,12 @@ func LlPush(v interface{}) {
 
 // LlPop remove node from queue
 func LlPop() interface{} {
+	if head.Next == tail {
+		return nil
+	}
 	node := *head.Next
-	fmt.Println("Node:", node)
 	llDeleteNode(head.Next)
+
 	return node.V
 }
 

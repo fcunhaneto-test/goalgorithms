@@ -50,9 +50,12 @@ func main() {
 	p.Name = "Maria"
 	llQueue.LlPush(p)
 
-	fmt.Println()
-	llQueue.LlPrint()
-	fmt.Println()
-	llQueue.LlPrintReverse()
+	for true {
+		node = llQueue.LlPop()
+		if node == nil {
+			break
+		}
+		fmt.Println(node.(Person))
+	}
 
 }
