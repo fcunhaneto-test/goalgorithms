@@ -20,6 +20,7 @@ import (
 type Node struct {
 	N   string
 	Adj []*Node
+	CC  int
 	C   int
 	TI  int
 	TF  int
