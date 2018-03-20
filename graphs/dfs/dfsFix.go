@@ -2,11 +2,13 @@ package dfs
 
 import (
 	"goalgorithms/graphs"
+
 	"terminal"
 )
 
-// DFS Depth First Search (Busca em Profundidade)
-func DFS(graph map[string]*graphs.Node) {
+// DFSFix Depth First Search (Busca em Profundidade)
+func DFSFix(graph map[string]*graphs.Node, s string) {
+	explore(graph, graph[s])
 	for _, g := range graph {
 		if g.C == 0 {
 			explore(graph, g)

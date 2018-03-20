@@ -15,20 +15,20 @@ type Node struct {
 // LL link list
 type LL = *Node
 
-// head are head of link list
-var head = &Node{nil, nil, nil}
+// Head are Head of link list
+var Head = &Node{nil, nil, nil}
 
 // tail are tail of link list
 var tail = &Node{nil, nil, nil}
 
 func init() {
-	head.V = nil
-	head.Next = tail
-	head.Previ = nil
+	Head.V = nil
+	Head.Next = tail
+	Head.Previ = nil
 
 	tail.V = nil
 	tail.Next = nil
-	tail.Previ = head
+	tail.Previ = Head
 }
 
 // LlInit init list link
@@ -36,22 +36,22 @@ func llInit(v interface{}) Node {
 	var node Node
 	node.V = v
 	node.Next = tail
-	node.Previ = head
+	node.Previ = Head
 
-	head.Next = &node
+	Head.Next = &node
 	tail.Previ = &node
 
 	return node
 }
 
 // LlPush insert node in the queue
-func LlPush(v interface{}) {
+func LlPush(v interface{}) LL {
 	var node Node
-	current := head
+	current := Head
 
-	if head.Next == tail {
+	if Head.Next == tail {
 		node = llInit(v)
-		return
+		return &node
 	}
 
 	for current.Next != nil {
@@ -63,6 +63,8 @@ func LlPush(v interface{}) {
 	current.Previ.Next = &node
 	node.Previ = current.Previ
 	tail.Previ = &node
+
+	return &node
 }
 
 // LlPop remove node from queue
@@ -70,15 +72,15 @@ func LlPop() interface{} {
 	if LlEmpty() {
 		return nil
 	}
-	node := *head.Next
-	llDeleteNode(head.Next)
+	node := *Head.Next
+	llDeleteNode(Head.Next)
 
 	return node.V
 }
 
 // LlEmpty check if the list is empty
 func LlEmpty() bool {
-	if head.Next == tail {
+	if Head.Next == tail {
 		return true
 	}
 
@@ -87,9 +89,9 @@ func LlEmpty() bool {
 
 // LlDeleteNode delete node in link list
 func llDeleteNode(node LL) {
-	if node.Previ == head {
-		head.Next = node.Next
-		node.Next.Previ = head
+	if node.Previ == Head {
+		Head.Next = node.Next
+		node.Next.Previ = Head
 	} else if node.Next == tail {
 		tail.Previ = node.Previ
 		node.Previ.Next = tail
@@ -109,7 +111,7 @@ func llDeleteNode(node LL) {
 // LlFind find node in link list
 func LlFind(n int) LL {
 	var num int
-	node := head.Next
+	node := Head.Next
 
 	for node.Next != nil {
 		num = int(reflect.ValueOf(node.V).Field(0).Int())
@@ -125,7 +127,7 @@ func LlFind(n int) LL {
 // LlPrint print link list
 func LlPrint() {
 	var node LL
-	node = head.Next
+	node = Head.Next
 	fmt.Println(node.V)
 	for node.Next != nil {
 		node = node.Next
