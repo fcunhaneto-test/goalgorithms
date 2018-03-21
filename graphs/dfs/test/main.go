@@ -12,4 +12,5 @@ func main() {
 	fmt.Println("Enter the initial node:")
 	fmt.Scanf("%s", &s)
 	dfs.DFS(graph, s)
+
 }
