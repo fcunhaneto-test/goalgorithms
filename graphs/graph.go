@@ -4,72 +4,83 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strconv"
 	"strings"
 )
 
-// Node of graph who values are integer
+// Node BFS of graph who values are integer
+// type Node struct {
+// 	N   string
+// 	Adj []*Node
+// 	C   int
+// 	D   int
+// 	P   *Node
+// }
+
+// Node DFS of graph who values are integer
 type Node struct {
-	n   int
-	adj []int
+	N   string
+	Adj []*Node
+	CC  int
+	C   int
+	TI  int
+	TF  int
+	P   *Node
 }
 
-// Nodes all nodes of graph
-type Nodes []Node
+// Graph an array of all graphnodes
+var Graph map[string]*Node
 
 /*
-ReadNode first read an integer representing a node in graph then reads integers on the same space-separated line representing the adjacent nodes.
+ReadGraph first read an integer representing a number of nodes in graph, then read an string representing node, then reads strings on the same line separated by space representing the adjacent nodes.
 Example:
-# Enter vertex:
-# 1
-# Enter the adjacent vertices:
-# 2 6 7 10 5
+Enter the number of nodes:
+5
+Enter node:
+A
+Enter the adjacent nodes:
+B C F
 */
-func ReadNode() Node {
+func ReadGraph() map[string]*Node {
 	var num int
-	var a []int
-	var node Node
+	var s string
 	var line []string
+
 	reader := bufio.NewReader(os.Stdin)
 
-	fmt.Println("Enter vertex:")
+	fmt.Println("Enter the number of nodes: ")
 	fmt.Scanf("%d", &num)
-	node.n = num
 
-	fmt.Println("Enter the adjacent vertices: ")
-	text, _ := reader.ReadString('\n')
-	text = text[:len(text)-1]
+	Graph = make(map[string]*Node)
+	a := make(map[string][]string)
 
-	line = strings.Split(string(text), " ")
-	a = lineToInteger(line)
-	node.adj = a
+	for i := 0; i < num; i++ {
+		fmt.Println("Enter node: ")
+		fmt.Scanf("%s", &s)
+		node := new(Node)
+		node.N = s
+		Graph[s] = node
 
-	return node
-}
+		fmt.Printf("Enter the adjacent nodes for node: %s\n", s)
+		text, _ := reader.ReadString('\n')
+		text = text[:len(text)-1]
 
-/*
-lineToInteger transforms an array of strings into an array of float64
-param:
-line: []string
-return:
-s: []float64
-*/
-func lineToInteger(line []string) []int {
-	var num int
-	var err error
-	var s = []int{}
-
-	for _, l := range line {
-		num, err = strconv.Atoi(l)
-		if err != nil {
-			panic(err)
+		if text != "" {
+			line = strings.Split(string(text), " ")
+			a[s] = line
+		} else {
+			a[s] = nil
 		}
-		s = append(s, num)
 	}
 
-	return s
-}
+	for c, n := range Graph {
+		if a[c] != nil {
+			b := a[c]
+			n.Adj = make([]*Node, len(b))
+			for i := 0; i < len(b); i++ {
+				n.Adj[i] = Graph[b[i]]
+			}
+		}
+	}
 
-func BFS(node Nodes, n Node) {
-
+	return Graph
 }
