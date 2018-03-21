@@ -10,6 +10,7 @@ func printDFS() {
 	n = tail.V.(*graphs.Node)
 	fmt.Println("*********************************")
 	fmt.Println("Node:", n.N)
+	fmt.Println("CC:", n.CC)
 	if n.P != nil {
 		fmt.Println("Predecessor:", n.P.N)
 	} else {

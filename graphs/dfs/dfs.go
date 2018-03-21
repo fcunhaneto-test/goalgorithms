@@ -13,6 +13,7 @@ func DFS(graph map[string]*graphs.Node) {
 	for _, g := range graph {
 		if g.C == 0 {
 			cc++
+			g.CC = cc
 			explore(graph, g)
 		}
 	}

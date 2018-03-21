@@ -67,7 +67,6 @@ func ReadGraph() map[string]*Node {
 		if text != "" {
 			line = strings.Split(string(text), " ")
 			a[s] = line
-			// fmt.Println("s:", s, "a[s]:", a[s])
 		} else {
 			a[s] = nil
 		}
