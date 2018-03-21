@@ -14,6 +14,7 @@ func explore(graph map[string]*graphs.Node, u *graphs.Node) {
 	gtime++
 	u.TI = gtime
 	u.C = 1
+	u.CC = cc
 
 	for i := 0; i < len(u.Adj); i++ {
 		if u.Adj[i] == nil {
@@ -21,8 +22,8 @@ func explore(graph map[string]*graphs.Node, u *graphs.Node) {
 		}
 		if u.Adj[i].C == 0 {
 			u.Adj[i].P = u
-			cc++
 			u.Adj[i].CC = cc
+			u.C = 1
 			explore(graph, u.Adj[i])
 		}
 	}

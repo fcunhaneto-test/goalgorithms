@@ -1,17 +1,16 @@
 package main
 
 import (
-	"fmt"
 	"goalgorithms/graphs"
 	"goalgorithms/graphs/dfs"
 )
 
 func main() {
-	var s string
+	// var s string
 	graph := graphs.ReadGraph()
-	fmt.Println("Enter the initial node:")
-	fmt.Scanf("%s", &s)
-	dfs.DFS(graph, s)
+	// fmt.Println("Enter the initial node:")
+	// fmt.Scanf("%s", &s)
+	dfs.DFS(graph)
 
 	// for _, n := range graph {
 	// 	fmt.Println("Node:", n.N)

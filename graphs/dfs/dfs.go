@@ -9,14 +9,10 @@ import (
 var cc int
 
 // DFS Depth First Search (Busca em Profundidade)
-func DFS(graph map[string]*graphs.Node, s string) {
-	cc++
-	graph[s].CC = cc
-	explore(graph, graph[s])
+func DFS(graph map[string]*graphs.Node) {
 	for _, g := range graph {
 		if g.C == 0 {
 			cc++
-			graph[s].CC = cc
 			explore(graph, g)
 		}
 	}
