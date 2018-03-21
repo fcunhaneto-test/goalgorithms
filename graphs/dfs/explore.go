@@ -1,7 +1,6 @@
 package dfs
 
 import (
-	"fmt"
 	"goalgorithms/graphs"
 	"goalgorithms/llQueue"
 )
@@ -12,11 +11,9 @@ var tail llQueue.LL
 
 // explore given the initial node exploits the descents of this node
 func explore(graph map[string]*graphs.Node, u *graphs.Node) {
-	var o string
+	gtime++
 	u.TI = gtime
 	u.C = 1
-	fmt.Println(u.N, u.CC)
-	fmt.Scanf("%s", &o)
 
 	for i := 0; i < len(u.Adj); i++ {
 		if u.Adj[i] == nil {
