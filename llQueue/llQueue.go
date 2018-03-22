@@ -3,6 +3,7 @@ package llQueue
 import (
 	"fmt"
 	"reflect"
+	"strings"
 )
 
 // Node struct for link list
@@ -109,13 +110,13 @@ func llDeleteNode(node LL) {
 }
 
 // LlFind find node in link list
-func LlFind(n int) LL {
-	var num int
+func LlFind(n string) LL {
+	var s string
 	node := Head.Next
 
 	for node.Next != nil {
-		num = int(reflect.ValueOf(node.V).Field(0).Int())
-		if num == n {
+		s = string(reflect.ValueOf(node.V).Field(0).String())
+		if strings.Compare(s, n) == 0 {
 			return node
 		}
 

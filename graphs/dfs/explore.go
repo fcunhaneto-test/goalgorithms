@@ -2,15 +2,15 @@ package dfs
 
 import (
 	"goalgorithms/graphs"
-	"goalgorithms/llQueue"
+	"goalgorithms/linklist"
 )
 
 var gtime int
 
-var tail llQueue.LL
+var tail linklist.LL
 
 // explore given the initial node exploits the descents of this node
-func explore(graph map[string]*graphs.Node, u *graphs.Node) {
+func explore(u *graphs.Vertex) {
 	gtime++
 	u.TI = gtime
 	u.C = 1
@@ -23,12 +23,11 @@ func explore(graph map[string]*graphs.Node, u *graphs.Node) {
 			u.Adj[i].P = u
 			u.Adj[i].CC = cc
 			u.C = 1
-			explore(graph, u.Adj[i])
+			explore(u.Adj[i])
 		}
 	}
 
 	u.C = 2
 	gtime++
 	u.TF = gtime
-	tail = llQueue.LlPush(u)
 }

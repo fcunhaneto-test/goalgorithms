@@ -3,84 +3,78 @@ package graphs
 import (
 	"bufio"
 	"fmt"
+	"goalgorithms/linklist"
 	"os"
 	"strings"
 )
 
-// Node BFS of graph who values are integer
-// type Node struct {
-// 	N   string
-// 	Adj []*Node
-// 	C   int
-// 	D   int
-// 	P   *Node
-// }
-
-// Node DFS of graph who values are integer
-type Node struct {
-	N   string
-	Adj []*Node
+// Vertex struct that represent vertex of graph
+type Vertex struct {
+	V   string
+	Adj []*Vertex
 	CC  int
 	C   int
 	TI  int
 	TF  int
-	P   *Node
+	P   *Vertex
 }
 
 // Graph an array of all graphnodes
-var Graph map[string]*Node
+var Graph map[string]*Vertex
 
 /*
-ReadGraph first read an integer representing a number of nodes in graph, then read an string representing node, then reads strings on the same line separated by space representing the adjacent nodes.
+ReadGraph first read vertex name in graph, then reads strings on the same line separated by space representing the name of adjacent vertices.
 Example:
-Enter the number of nodes:
-5
 Enter node:
 A
 Enter the adjacent nodes:
 B C F
 */
-func ReadGraph() map[string]*Node {
-	var num int
+func ReadGraph() linklist.LL {
 	var s string
+	var v *Vertex
+	var current linklist.LL
 	var line []string
 
+	Graph = make(map[string]*Vertex)
 	reader := bufio.NewReader(os.Stdin)
 
-	fmt.Println("Enter the number of nodes: ")
-	fmt.Scanf("%d", &num)
-
-	Graph = make(map[string]*Node)
-	a := make(map[string][]string)
-
-	for i := 0; i < num; i++ {
-		fmt.Println("Enter node: ")
+	fmt.Println("Enter the vertex name (or 0 to stop):")
+	fmt.Scanf("%s", &s)
+	for strings.Compare(s, "0") != 0 {
+		v = new(Vertex)
+		v.V = s
+		current = linklist.LlEnqueue(v, current)
+		Graph[s] = v
+		fmt.Println("Enter the vertex name (or nothing to stop):")
 		fmt.Scanf("%s", &s)
-		node := new(Node)
-		node.N = s
-		Graph[s] = node
+	}
 
-		fmt.Printf("Enter the adjacent nodes for node: %s\n", s)
+	current = linklist.GetHead()
+	for current.Next != nil {
+		v = current.N.(*Vertex)
+		fmt.Printf("Enter the adjacent nodes for node: %s\n", v.V)
 		text, _ := reader.ReadString('\n')
 		text = text[:len(text)-1]
+		line = strings.Split(string(text), " ")
 
-		if text != "" {
-			line = strings.Split(string(text), " ")
-			a[s] = line
-		} else {
-			a[s] = nil
+		v.Adj = make([]*Vertex, len(line))
+		for i := 0; i < len(line); i++ {
+			v.Adj[i] = Graph[line[i]]
 		}
+
+		current = current.Next
+
 	}
 
-	for c, n := range Graph {
-		if a[c] != nil {
-			b := a[c]
-			n.Adj = make([]*Node, len(b))
-			for i := 0; i < len(b); i++ {
-				n.Adj[i] = Graph[b[i]]
-			}
-		}
+	current = linklist.GetHead()
+	for current.Next != nil {
+		v = current.N.(*Vertex)
+		fmt.Println(v.V, v.Adj)
+		current = current.Next
 	}
 
-	return Graph
+	current = linklist.GetHead()
+
+	return current
 }

@@ -3,29 +3,29 @@ package dfs
 import (
 	"fmt"
 	"goalgorithms/graphs"
+	"goalgorithms/linklist"
 )
 
-func printDFS() {
-	var n *graphs.Node
-	n = tail.V.(*graphs.Node)
+func printDFS(tail linklist.LL) {
+	n := tail.N.(*graphs.Vertex)
 	fmt.Println("*********************************")
-	fmt.Println("Node:", n.N)
+	fmt.Println("Vertex:", n.V)
 	fmt.Println("CC:", n.CC)
 	if n.P != nil {
-		fmt.Println("Predecessor:", n.P.N)
+		fmt.Println("Predecessor:", n.P.V)
 	} else {
 		fmt.Println("Predecessor: null")
 	}
 	fmt.Printf("Time: %d/%d\n", n.TI, n.TF)
 	fmt.Println("*********************************")
-	for tail.Previ != nil {
-		tail = tail.Previ
-		if tail.Previ != nil {
-			n = tail.V.(*graphs.Node)
-			fmt.Println("Node:", n.N)
+	for tail.Next != nil {
+		tail = tail.Next
+		if tail.Next != nil {
+			n = tail.N.(*graphs.Vertex)
+			fmt.Println("Vertex:", n.V)
 			fmt.Println("CC:", n.CC)
 			if n.P != nil {
-				fmt.Println("Predecessor:", n.P.N)
+				fmt.Println("Predecessor:", n.P.V)
 			} else {
 				fmt.Println("Predecessor: null")
 			}

@@ -2,6 +2,7 @@ package dfs
 
 import (
 	"goalgorithms/graphs"
+	"goalgorithms/linklist"
 
 	"terminal"
 )
@@ -9,18 +10,18 @@ import (
 var cc int
 
 // DFS Depth First Search (Busca em Profundidade)
-func DFS(graph map[string]*graphs.Node, s string) {
-	cc = 1
-	graph[s].CC = cc
-	explore(graph, graph[s])
-	for _, g := range graph {
+func DFS(graph linklist.LL) {
+	current := graph
+	for current.Next != nil {
+		g := current.N.(*graphs.Vertex)
 		if g.C == 0 {
 			cc++
 			g.CC = cc
-			explore(graph, g)
+			explore(g)
 		}
+		current = current.Next
 	}
 
 	terminal.Clear()
-	printDFS()
+	printDFS(linklist.GetHead())
 }

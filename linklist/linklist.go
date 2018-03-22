@@ -3,11 +3,12 @@ package linklist
 import (
 	"fmt"
 	"reflect"
+	"strings"
 )
 
 // Node struct for link list
 type Node struct {
-	V     interface{}
+	N     interface{}
 	Next  *Node
 	Previ *Node
 }
@@ -22,11 +23,11 @@ var head = &Node{nil, nil, nil}
 var tail = &Node{nil, nil, nil}
 
 func init() {
-	head.V = nil
+	head.N = nil
 	head.Next = tail
 	head.Previ = nil
 
-	tail.V = nil
+	tail.N = nil
 	tail.Next = nil
 	tail.Previ = head
 }
@@ -34,7 +35,7 @@ func init() {
 // LlInit init list link
 func LlInit(v interface{}) LL {
 	var node Node
-	node.V = v
+	node.N = v
 	node.Next = tail
 	node.Previ = head
 
@@ -44,17 +45,61 @@ func LlInit(v interface{}) LL {
 	return &node
 }
 
-// LlInsertTail insert node in tail of link list
-func LlInsertTail(v interface{}, current LL) LL {
+// LlEnqueue insert node in tail of link list
+func LlEnqueue(v interface{}, current LL) LL {
 	var node Node
 
-	node.V = v
+	if current == nil || LlEmpty() {
+		return LlInit(v)
+	}
+
+	node.N = v
 	node.Next = tail
 	node.Previ = current
 	current.Next = &node
 	tail.Previ = &node
 
 	return &node
+}
+
+// LlPush insert node in head of link list
+func LlPush(v interface{}, current LL) LL {
+	var node Node
+
+	if current == nil || LlEmpty() {
+		return LlInit(v)
+	}
+
+	node.N = v
+	node.Next = current
+	node.Previ = head
+
+	head.Next = &node
+	current.Previ = &node
+
+	return &node
+}
+
+// LlInsertBefore insert node before current node
+func LlInsertBefore(v interface{}, current LL) {
+	var node Node
+
+	node.N = v
+	node.Next = current
+	node.Previ = current.Previ
+
+	current.Previ = &node
+}
+
+// LlInsertAfter insert node after current node
+func LlInsertAfter(v interface{}, current LL) {
+	var node Node
+
+	node.N = v
+	node.Next = current.Next
+	node.Previ = current
+
+	current.Next = &node
 }
 
 // GetHead return the head of link lists
@@ -67,74 +112,71 @@ func GetTail() LL {
 	return tail.Previ
 }
 
-// LlInsertBefore insert node before current node
-func LlInsertBefore(v interface{}, current LL) LL {
-	var node Node
-
-	node.V = v
-	if current.Previ == head {
-		node.Next = current
-		node.Previ = head
-
-		head.Next = &node
-		current.Previ = &node
-	} else {
-		node.Next = current
-		node.Previ = current.Previ
-
-		current.Previ.Next = &node
-		current.Previ = &node
-	}
-
-	return &node
-}
-
 // LlDeleteNode delete node in link list
-func LlDeleteNode(node LL) {
-	if node.Previ == head {
-		head.Next = node.Next
-		node.Next.Previ = head
-	} else if node.Next == tail {
-		tail.Previ = node.Previ
-		node.Previ.Next = tail
-	} else {
-		// previ := node.Previ
-		// next := node.Next
+func LlDeleteNode(n LL) {
+	a := n.Next
+	b := n.Previ
+	a.Previ = b
+	b.Next = a
 
-		node.Previ.Next = node.Next
-		node.Next.Previ = node.Previ
-	}
-
-	node.V = nil
-	node.Next = nil
-	node.Previ = nil
+	n.N = nil
+	n.Next = nil
+	n.Previ = nil
 }
 
-// LlFind find node in link list
-func LlFind(n int) LL {
-	var num int
+// LlFindByS find node in link list by string value
+func LlFindByS(n string, field int) LL {
+	var s string
 	node := head.Next
+	f := field - 1
 
 	for node.Next != nil {
-		num = int(reflect.ValueOf(node.V).Field(0).Int())
-		if num == n {
+		s = string(reflect.ValueOf(node.N).Field(f).String())
+		if strings.Compare(s, n) == 0 {
 			return node
 		}
 
 		node = node.Next
 	}
+
 	return nil
+}
+
+// LlFindByI find node in link list by int value
+func LlFindByI(i int, field int) LL {
+	var n int
+	node := head.Next
+	f := field - 1
+
+	for node.Next != nil {
+		n = int(reflect.ValueOf(node.N).Field(f).Int())
+		if n == i {
+			return node
+		}
+		fmt.Println("Node:", node)
+		node = node.Next
+	}
+
+	return nil
+}
+
+func LlEmpty() bool {
+	if head.Next == tail {
+		return true
+	}
+
+	return false
 }
 
 // LlPrint print link list
 func LlPrint() {
 	var node LL
 	node = head.Next
-	fmt.Println(node.V)
+	fmt.Println(node.N)
 	for node.Next != nil {
 		node = node.Next
 		if node.Next != nil {
-			fmt.Println(node.V)
+			fmt.Println(node.N)
 		}
 	}
 }
@@ -144,12 +186,12 @@ func LlPrintReverse() {
 	var node LL
 	node = tail.Previ
 
-	fmt.Println(node.V)
+	fmt.Println(node.N)
 	for node.Previ != nil {
 		node = node.Previ
 
 		if node.Previ != nil {
-			fmt.Println(node.V)
+			fmt.Println(node.N)
 		}
 	}
 }
