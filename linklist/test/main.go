@@ -14,23 +14,27 @@ type Person struct {
 func main() {
 	var s string
 	var p Person
-	var head, tail, current linklist.LList
+	var current *linklist.Node
+
+	current = linklist.LlStart()
+	fmt.Println("current:", current)
 
 	p.ID = 1
 	p.Name = "Francisco"
-	head.LlInit(p)
+	current = current.LlPush(p)
+	fmt.Println("first:", current)
 
 	p.ID = 2
 	p.Name = "Erica"
-	tail.LlPush(p)
+	current = current.LlPush(p)
 
 	p.ID = 3
 	p.Name = "João"
-	tail.LlPush(p)
+	current = current.LlPush(p)
 
 	p.ID = 4
 	p.Name = "Paula"
-	tail.LlPush(p)
+	current = current.LlPush(p)
 
 	fmt.Println()
 	linklist.LlPrint()
@@ -39,6 +43,6 @@ func main() {
 	fmt.Println("Enter person name for delete:")
 	fmt.Scanf("%s", &s)
 
-	current.LL = linklist.LlFindByS(s, 2)
-	fmt.Println("Find:", current)
+	// current.LL = linklist.LlFindByS(s, 2)
+	// fmt.Println("Find:", current)
 }

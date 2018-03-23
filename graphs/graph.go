@@ -19,9 +19,6 @@ type Vertex struct {
 	P   *Vertex
 }
 
-// Graph an array of all graphnodes
-var Graph map[string]*Vertex
-
 /*
 ReadGraph first read vertex name in graph, then reads strings on the same line separated by space representing the name of adjacent vertices.
 Example:
@@ -33,26 +30,28 @@ B C F
 func ReadGraph() linklist.LL {
 	var s string
 	var v *Vertex
-	var current linklist.LL
+	var graph linklist.LL
 	var line []string
-
-	Graph = make(map[string]*Vertex)
+	var gmap map[string]*Vertex
 	reader := bufio.NewReader(os.Stdin)
+
+	graph = linklist.LlStart()
+	gmap = make(map[string]*Vertex)
 
 	fmt.Println("Enter the vertex name (or 0 to stop):")
 	fmt.Scanf("%s", &s)
 	for strings.Compare(s, "0") != 0 {
 		v = new(Vertex)
 		v.V = s
-		current = linklist.LlEnqueue(v, current)
-		Graph[s] = v
+		graph = graph.LlEnqueue(v)
+		gmap[s] = v
 		fmt.Println("Enter the vertex name (or nothing to stop):")
 		fmt.Scanf("%s", &s)
 	}
 
-	current = linklist.GetHead()
-	for current.Next != nil {
-		v = current.N.(*Vertex)
+	graph = graph.GetHead()
+	for graph.Next != nil {
+		v = graph.N.(*Vertex)
 		fmt.Printf("Enter the adjacent nodes for node: %s\n", v.V)
 		text, _ := reader.ReadString('\n')
 		text = text[:len(text)-1]
@@ -60,21 +59,21 @@ func ReadGraph() linklist.LL {
 
 		v.Adj = make([]*Vertex, len(line))
 		for i := 0; i < len(line); i++ {
-			v.Adj[i] = Graph[line[i]]
+			v.Adj[i] = gmap[line[i]]
 		}
 
-		current = current.Next
+		graph = graph.Next
 
 	}
 
-	current = linklist.GetHead()
-	for current.Next != nil {
-		v = current.N.(*Vertex)
+	graph = graph.GetHead()
+	for graph.Next != nil {
+		v = graph.N.(*Vertex)
 		fmt.Println(v.V, v.Adj)
-		current = current.Next
+		graph = graph.Next
 	}
 
-	current = linklist.GetHead()
+	graph = graph.GetHead()
 
-	return current
+	return graph
 }

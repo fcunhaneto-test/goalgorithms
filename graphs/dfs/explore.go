@@ -30,4 +30,6 @@ func explore(u *graphs.Vertex) {
 	u.C = 2
 	gtime++
 	u.TF = gtime
+
+	ga = ga.LlPush(u)
 }

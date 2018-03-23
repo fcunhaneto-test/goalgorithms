@@ -13,9 +13,15 @@ type Node struct {
 	Previ *Node
 }
 
-// LL link list
-type LList struct {
-	LL *Node
+type LL = *Node
+
+type I interface {
+	LlEnqueue(v interface{})
+	LlPush(v interface{})
+	LlInsertBefore(v interface{})
+	LlInsertAfter(v interface{})
+	GetHead()
+	GetTail()
 }
 
 // head are head of link list
@@ -24,10 +30,8 @@ var head = &Node{nil, nil, nil}
 // tail are tail of link list
 var tail = &Node{nil, nil, nil}
 
-// LlInit init list link
-func (current LList) LlInit(v interface{}) {
-	var node Node
-
+// LlStart start link list
+func LlStart() LL {
 	head.N = nil
 	head.Next = tail
 	head.Previ = nil
@@ -36,6 +40,13 @@ func (current LList) LlInit(v interface{}) {
 	tail.Next = nil
 	tail.Previ = head
 
+	return head
+}
+
+// LlInit input first node in list link
+func llInit(v interface{}) LL {
+	var node Node
+
 	node.N = v
 	node.Next = tail
 	node.Previ = head
@@ -43,65 +54,72 @@ func (current LList) LlInit(v interface{}) {
 	head.Next = &node
 	tail.Previ = &node
 
-	current.LL = &node
+	return &node
 }
 
 // LlEnqueue insert node in tail of link list
-func (current LList) LlEnqueue(v interface{}) {
+func (current LL) LlEnqueue(v interface{}) LL {
 	var node Node
+
+	if current == nil || LlEmpty() {
+		return llInit(v)
+	}
 
 	node.N = v
 	node.Next = tail
-	node.Previ = current.LL
-	current.LL.Next = &node
+	node.Previ = current
+	current.Next = &node
 	tail.Previ = &node
 
-	current.LL = &node
+	return &node
 }
 
 // LlPush insert node in head of link list
-func (current LList) LlPush(v interface{}) {
+func (current LL) LlPush(v interface{}) LL {
 	var node Node
 
+	if current == nil || LlEmpty() {
+		return llInit(v)
+	}
+
 	node.N = v
-	node.Next = current.LL
+	node.Next = current
 	node.Previ = head
 
 	head.Next = &node
-	current.LL.Previ = &node
+	current.Previ = &node
 
-	current.LL = &node
+	return &node
 }
 
 // LlInsertBefore insert node before current node
-func (current LList) LlInsertBefore(v interface{}) {
+func (current LL) LlInsertBefore(v interface{}) {
 	var node Node
 
 	node.N = v
-	node.Next = current.LL
-	node.Previ = current.LL.Previ
-
-	current.LL.Previ = &node
+	node.Next = current
+	node.Previ = current.Previ
+	current.Previ = &node
 }
 
 // LlInsertAfter insert node after current node
-func (current LList) LlInsertAfter(v interface{}) {
+func (current LL) LlInsertAfter(v interface{}) {
 	var node Node
 
 	node.N = v
-	node.Next = current.LL.Next
-	node.Previ = current.LL
+	node.Next = current.Next
+	node.Previ = current
 
-	current.LL.Next = &node
+	current.Next = &node
 }
 
 // GetHead return the head of link lists
-func GetHead() *Node {
+func (current LL) GetHead() LL {
 	return head.Next
 }
 
 // GetTail return the tail of link lists
-func GetTail() *Node {
+func (current LL) GetTail() LL {
 	return tail.Previ
 }
 
@@ -170,7 +188,7 @@ func LlPrint() {
 	for node.Next != nil {
 		node = node.Next
 		if node.Next != nil {
-			fmt.Println(node.N)
+			fmt.Println(node.N, *node)
 		}
 	}
 }

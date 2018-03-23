@@ -8,20 +8,21 @@ import (
 )
 
 var cc int
+var ga linklist.LL
 
 // DFS Depth First Search (Busca em Profundidade)
 func DFS(graph linklist.LL) {
-	current := graph
-	for current.Next != nil {
-		g := current.N.(*graphs.Vertex)
+	ga = linklist.LlStart()
+	for graph.Next != nil {
+		g := graph.N.(*graphs.Vertex)
 		if g.C == 0 {
 			cc++
 			g.CC = cc
 			explore(g)
 		}
-		current = current.Next
+		graph = graph.Next
 	}
 
 	terminal.Clear()
-	printDFS(linklist.GetHead())
+	printDFS(ga.GetHead())
 }
