@@ -1,3 +1,6 @@
+/*
+Package linklist - link list can use as stack or queue
+*/
 package linklist
 
 import (
@@ -13,8 +16,10 @@ type Node struct {
 	Previ *Node
 }
 
+// LL alias for pointer to node
 type LL = *Node
 
+// I interface for link list
 type I interface {
 	LlEnqueue(v interface{})
 	LlPush(v interface{})
@@ -92,6 +97,17 @@ func (current LL) LlPush(v interface{}) LL {
 	return &node
 }
 
+// LlPop remove node from queue
+func (current LL) LlPop() (interface{}, LL) {
+	if LlEmpty() {
+		return nil, nil
+	}
+	node := *head.Next
+	llDeleteNode(head.Next)
+
+	return node.N, head.Next
+}
+
 // LlInsertBefore insert node before current node
 func (current LL) LlInsertBefore(v interface{}) {
 	var node Node
@@ -124,7 +140,7 @@ func (current LL) GetTail() LL {
 }
 
 // LlDeleteNode delete node in link list
-func LlDeleteNode(n *Node) {
+func llDeleteNode(n *Node) {
 	a := n.Next
 	b := n.Previ
 	a.Previ = b

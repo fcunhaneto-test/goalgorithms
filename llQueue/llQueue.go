@@ -89,24 +89,15 @@ func LlEmpty() bool {
 }
 
 // LlDeleteNode delete node in link list
-func llDeleteNode(node LL) {
-	if node.Previ == Head {
-		Head.Next = node.Next
-		node.Next.Previ = Head
-	} else if node.Next == tail {
-		tail.Previ = node.Previ
-		node.Previ.Next = tail
-	} else {
-		// previ := node.Previ
-		// next := node.Next
+func llDeleteNode(n *Node) {
+	a := n.Next
+	b := n.Previ
+	a.Previ = b
+	b.Next = a
 
-		node.Previ.Next = node.Next
-		node.Next.Previ = node.Previ
-	}
-
-	node.V = nil
-	node.Next = nil
-	node.Previ = nil
+	n.N = nil
+	n.Next = nil
+	n.Previ = nil
 }
 
 // LlFind find node in link list
