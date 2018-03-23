@@ -1,21 +1,38 @@
 package bfs
 
 import (
+	"fmt"
 	"goalgorithms/graphs"
 	"goalgorithms/linklist"
-	"goalgorithms/llqueue"
 )
 
-func BFS(graph linklist.LL, s string) {
-	// var ll linklist.LL
-	u := linklist.LlFindByS(s, 0)
+// BFS Breadth First Traversal (Busca em Largura)
+func BFS(s string) {
+	var ll linklist.LL
 
-	v := u.N.(*graphs.Vertex)
+	v := graphs.Gmap[s]
+
 	v.C = 1
 
-	ll := linklist.LlStart()
-	ll = ll.LlPush(v)
+	ll = ll.LlStart()
+	ll = ll.LlEnqueue(v)
 
-	for ll.
+	for !ll.LlEmpty() {
+		u := ll.LlPop()
+		w := u.(*graphs.Vertex)
+		t := w.Adj
+
+		if t != nil {
+			for i := 0; i < len(t); i++ {
+				fmt.Println("Adj:", t[i].V)
+				if t[i].C == 0 {
+					t[i].C = 1
+					t[i].TI = w.TI + 1
+					t[i].P = w
+					ll = ll.LlEnqueue(t[i])
+				}
+			}
+		}
+	}
 
 }

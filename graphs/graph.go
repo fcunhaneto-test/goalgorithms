@@ -19,6 +19,9 @@ type Vertex struct {
 	P   *Vertex
 }
 
+// Gmap map of graph
+var Gmap map[string]*Vertex
+
 /*
 ReadGraph first read vertex name in graph, then reads strings on the same line separated by space representing the name of adjacent vertices.
 Example:
@@ -32,11 +35,11 @@ func ReadGraph() linklist.LL {
 	var v *Vertex
 	var graph linklist.LL
 	var line []string
-	var gmap map[string]*Vertex
+
 	reader := bufio.NewReader(os.Stdin)
 
-	graph = linklist.LlStart()
-	gmap = make(map[string]*Vertex)
+	graph = graph.LlStart()
+	Gmap = make(map[string]*Vertex)
 
 	fmt.Println("Enter the vertex name (or 0 to stop):")
 	fmt.Scanf("%s", &s)
@@ -44,7 +47,7 @@ func ReadGraph() linklist.LL {
 		v = new(Vertex)
 		v.V = s
 		graph = graph.LlEnqueue(v)
-		gmap[s] = v
+		Gmap[s] = v
 		fmt.Println("Enter the vertex name (or nothing to stop):")
 		fmt.Scanf("%s", &s)
 	}
@@ -59,7 +62,7 @@ func ReadGraph() linklist.LL {
 
 		v.Adj = make([]*Vertex, len(line))
 		for i := 0; i < len(line); i++ {
-			v.Adj[i] = gmap[line[i]]
+			v.Adj[i] = Gmap[line[i]]
 		}
 
 		graph = graph.Next

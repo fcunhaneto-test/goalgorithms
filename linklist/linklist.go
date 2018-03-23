@@ -27,6 +27,7 @@ type I interface {
 	LlInsertAfter(v interface{})
 	GetHead()
 	GetTail()
+	LlEmpty()
 }
 
 // head are head of link list
@@ -36,7 +37,7 @@ var head = &Node{nil, nil, nil}
 var tail = &Node{nil, nil, nil}
 
 // LlStart start link list
-func LlStart() LL {
+func (current LL) LlStart() LL {
 	head.N = nil
 	head.Next = tail
 	head.Previ = nil
@@ -66,7 +67,7 @@ func llInit(v interface{}) LL {
 func (current LL) LlEnqueue(v interface{}) LL {
 	var node Node
 
-	if current == nil || LlEmpty() {
+	if current == nil || llEmpty() {
 		return llInit(v)
 	}
 
@@ -83,7 +84,7 @@ func (current LL) LlEnqueue(v interface{}) LL {
 func (current LL) LlPush(v interface{}) LL {
 	var node Node
 
-	if current == nil || LlEmpty() {
+	if current == nil || llEmpty() {
 		return llInit(v)
 	}
 
@@ -98,14 +99,19 @@ func (current LL) LlPush(v interface{}) LL {
 }
 
 // LlPop remove node from queue
-func (current LL) LlPop() (interface{}, LL) {
-	if LlEmpty() {
-		return nil, nil
+func (current LL) LlPop() interface{} {
+	if llEmpty() {
+		return nil
 	}
 	node := *head.Next
 	llDeleteNode(head.Next)
 
-	return node.N, head.Next
+	return node.N
+}
+
+// LlEmpty verify if link list is empty
+func (current LL) LlEmpty() bool {
+	return llEmpty()
 }
 
 // LlInsertBefore insert node before current node
@@ -141,6 +147,9 @@ func (current LL) GetTail() LL {
 
 // LlDeleteNode delete node in link list
 func llDeleteNode(n *Node) {
+	u := n
+	v := u.N
+	fmt.Println(v)
 	a := n.Next
 	b := n.Previ
 	a.Previ = b
@@ -187,8 +196,8 @@ func LlFindByI(i int, field int) *Node {
 	return nil
 }
 
-// LlEmpty verify if link list is empty
-func LlEmpty() bool {
+// llEmpty verify if link list is empty
+func llEmpty() bool {
 	if head.Next == tail {
 		return true
 	}

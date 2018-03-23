@@ -12,7 +12,7 @@ var ga linklist.LL
 
 // DFS Depth First Search (Busca em Profundidade)
 func DFS(graph linklist.LL) {
-	ga = linklist.LlStart()
+	ga = ga.LlStart()
 	for graph.Next != nil {
 		g := graph.N.(*graphs.Vertex)
 		if g.C == 0 {
