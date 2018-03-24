@@ -70,13 +70,6 @@ func ReadGraph() linklist.LL {
 	}
 
 	graph = graph.GetHead()
-	for graph.Next != nil {
-		v = graph.N.(*Vertex)
-		fmt.Println(v.V, v.Adj)
-		graph = graph.Next
-	}
-
-	graph = graph.GetHead()
 
 	return graph
 }

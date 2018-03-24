@@ -147,9 +147,6 @@ func (current LL) GetTail() LL {
 
 // LlDeleteNode delete node in link list
 func llDeleteNode(n *Node) {
-	u := n
-	v := u.N
-	fmt.Println(v)
 	a := n.Next
 	b := n.Previ
 	a.Previ = b

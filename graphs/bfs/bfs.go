@@ -1,7 +1,6 @@
 package bfs
 
 import (
-	"fmt"
 	"goalgorithms/graphs"
 	"goalgorithms/linklist"
 )
@@ -24,7 +23,6 @@ func BFS(s string) {
 
 		if t != nil {
 			for i := 0; i < len(t); i++ {
-				fmt.Println("Adj:", t[i].V)
 				if t[i].C == 0 {
 					t[i].C = 1
 					t[i].TI = w.TI + 1
