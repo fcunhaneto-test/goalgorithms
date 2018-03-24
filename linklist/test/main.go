@@ -16,7 +16,7 @@ func main() {
 	var p Person
 	var current *linklist.Node
 
-	current = linklist.LlStart()
+	current = current.LlStart()
 	fmt.Println("current:", current)
 
 	p.ID = 1
