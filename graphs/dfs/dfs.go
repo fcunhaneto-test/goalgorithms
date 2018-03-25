@@ -11,7 +11,7 @@ var cc int
 var ga linklist.LL
 
 // DFS Depth First Search (Busca em Profundidade)
-func DFS(graph linklist.LL) {
+func DFS(graph linklist.LL) linklist.LL {
 	ga = ga.LlStart()
 	for graph.Next != nil {
 		g := graph.N.(*graphs.Vertex)
@@ -24,5 +24,5 @@ func DFS(graph linklist.LL) {
 	}
 
 	terminal.Clear()
-	printDFS(ga.GetHead())
+	return ga.GetHead()
 }

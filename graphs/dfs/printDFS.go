@@ -6,7 +6,7 @@ import (
 	"goalgorithms/linklist"
 )
 
-func printDFS(head linklist.LL) {
+func PrintDFS(head linklist.LL) {
 	var n *graphs.Vertex
 	for head.Next != nil {
 		n = head.N.(*graphs.Vertex)

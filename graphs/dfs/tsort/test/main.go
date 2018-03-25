@@ -2,11 +2,10 @@ package main
 
 import (
 	"goalgorithms/graphs"
-	"goalgorithms/graphs/dfs"
+	"goalgorithms/graphs/dfs/tsort"
 )
 
 func main() {
 	graph := graphs.ReadGraph()
-	graph = dfs.DFS(graph)
-	dfs.PrintDFS(graph)
+	tsort.Tsort(graph)
 }
