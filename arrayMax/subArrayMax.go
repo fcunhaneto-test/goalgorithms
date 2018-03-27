@@ -4,7 +4,7 @@ import (
 	"math"
 )
 
-// SubArrayMax the indexes and the value of the largest subarray.
+// SubArrayMax use Kadane algorithm to find the indexes and the value of the largest subarray.
 func SubArrayMax(a []int) (int, int, int) {
 	x, y := 0, 0
 	maxNow := 0
